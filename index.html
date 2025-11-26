@@ -29,8 +29,8 @@
             color: #e5e7eb;
             background:
                     linear-gradient(to bottom right,
-                    rgba(15, 23, 42, 0.90),
-                    rgba(15, 23, 42, 0.96)),
+                    rgba(15, 23, 42, 0.75),
+                    rgba(15, 23, 42, 0.85)),
                     url("assets/hero-city.png") no-repeat center center fixed;
             background-size: cover;
         }
@@ -56,15 +56,15 @@
             right: 0;
             backdrop-filter: blur(18px);
             background: radial-gradient(circle at top left,
-            rgba(15, 23, 42, 0.92),
-            rgba(15, 23, 42, 0.94));
+            rgba(15, 23, 42, 0.88),
+            rgba(15, 23, 42, 0.92));
             border-bottom: 1px solid rgba(148, 163, 184, 0.35);
         }
 
         .container {
             max-width: 1120px;
             margin: 0 auto;
-            padding: 0.65rem 1.5rem;
+            padding: 0.5rem 1.5rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -74,13 +74,13 @@
         .brand {
             display: flex;
             align-items: center;
-            gap: 0.7rem;
+            gap: 0.8rem;
         }
 
         .logo-img {
-            height: 96px;
+            height: 120px;
             width: auto;
-            filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.9));
+            filter: drop-shadow(0 0 14px rgba(0, 0, 0, 0.9));
         }
 
         .brand-text-main {
@@ -93,7 +93,7 @@
         .brand-text-sub {
             font-size: 0.75rem;
             color: #cbd5f5;
-            opacity: 0.9;
+            opacity: 0.95;
         }
 
         .header-actions {
@@ -147,8 +147,8 @@
 
         .hero {
             position: relative;
-            min-height: 80vh;
-            padding-top: 4.3rem; /* ruimte voor header */
+            min-height: 65vh;
+            padding-top: 3rem; /* minder ruimte onder header */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -159,15 +159,15 @@
         .hero-inner {
             max-width: 1120px;
             width: 100%;
-            padding: 1.8rem 1.5rem 2.2rem;
+            padding: 1.4rem 1.5rem 1.8rem;
             display: grid;
             grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-            gap: 1.9rem;
+            gap: 1.5rem;
             align-items: center;
             background: radial-gradient(circle at top left,
-            rgba(15, 23, 42, 0.88),
-            rgba(15, 23, 42, 0.92));
-            border-radius: 24px;
+            rgba(15, 23, 42, 0.82),
+            rgba(15, 23, 42, 0.88));
+            border-radius: 20px;
             border: 1px solid rgba(148, 163, 184, 0.4);
             box-shadow: var(--sp-shadow-soft);
         }
@@ -182,7 +182,7 @@
             background: rgba(15, 23, 42, 0.9);
             border: 1px solid rgba(148, 163, 184, 0.65);
             color: #e5e7eb;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.7rem;
         }
 
         .badge-dot {
@@ -195,20 +195,20 @@
         .hero-title {
             font-size: clamp(2.1rem, 3.0vw, 2.6rem);
             line-height: 1.15;
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.55rem;
         }
 
         .hero-subtitle {
             font-size: 0.98rem;
-            color: #cbd5f5;
+            color: #e5e7eb;
             max-width: 34rem;
-            margin-bottom: 1.1rem;
+            margin-bottom: 1rem;
         }
 
         .hero-meta {
-            margin-top: 0.9rem;
+            margin-top: 0.7rem;
             font-size: 0.8rem;
-            color: #9ca3af;
+            color: #d1d5db;
         }
 
         .hero-meta span {
@@ -225,9 +225,9 @@
         }
 
         .hero-card {
-            background: rgba(15, 23, 42, 0.95);
+            background: rgba(15, 23, 42, 0.9);
             border-radius: var(--sp-radius-lg);
-            padding: 1.2rem 1.1rem;
+            padding: 1.1rem 1rem;
             box-shadow: var(--sp-shadow-soft);
             border: 1px solid rgba(148, 163, 184, 0.45);
         }
@@ -235,20 +235,20 @@
         .hero-card-title {
             font-size: 0.9rem;
             font-weight: 600;
-            margin-bottom: 0.45rem;
+            margin-bottom: 0.4rem;
             color: #e5e7eb;
         }
 
         .hero-card-text {
             font-size: 0.85rem;
-            color: #cbd5f5;
+            color: #d1d5db;
             line-height: 1.6;
         }
 
         /* SECTIES */
 
         .section {
-            padding: 1.3rem 1.5rem 2.3rem;
+            padding: 0.4rem 1.5rem 2.1rem; /* weinig ruimte tussen hero en video */
         }
 
         .section-inner {
@@ -257,14 +257,14 @@
         }
 
         .section-header {
-            margin-bottom: 0.9rem;
+            margin-bottom: 0.8rem;
         }
 
         .section-title {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             font-weight: 600;
             color: #e5e7eb;
-            margin-bottom: 0.2rem;
+            margin-bottom: 0.15rem;
         }
 
         .section-subtitle {
@@ -273,19 +273,19 @@
         }
 
         .video-wrapper {
-            margin-top: 1.0rem;
+            margin-top: 0.7rem;
             border-radius: var(--sp-radius-lg);
             border: 1px solid rgba(148, 163, 184, 0.4);
             background: radial-gradient(circle at top left,
             rgba(15, 23, 42, 0.96),
             rgba(15, 23, 42, 0.96));
             box-shadow: var(--sp-shadow-soft);
-            padding: 1.1rem;
+            padding: 1rem;
         }
 
         .video-frame {
             position: relative;
-            border-radius: 16px;
+            border-radius: 14px;
             background: #020617;
             overflow: hidden;
         }
@@ -299,14 +299,14 @@
         .video-caption {
             font-size: 0.8rem;
             color: #9ca3af;
-            margin-top: 0.55rem;
+            margin-top: 0.5rem;
         }
 
         /* FOOTER */
 
         footer {
             border-top: 1px solid rgba(148, 163, 184, 0.35);
-            padding: 0.9rem 1.5rem 1.2rem;
+            padding: 0.8rem 1.5rem 1.1rem;
             font-size: 0.8rem;
             color: #9ca3af;
             background: rgba(2, 6, 23, 0.96);
@@ -326,7 +326,7 @@
         @media (max-width: 880px) {
             .hero-inner {
                 grid-template-columns: minmax(0, 1fr);
-                gap: 1.4rem;
+                gap: 1.3rem;
             }
 
             header .container {
@@ -336,6 +336,10 @@
         }
 
         @media (max-width: 640px) {
+            .logo-img {
+                height: 60px;
+            }
+
             .brand-text-sub {
                 display: none;
             }
@@ -416,11 +420,10 @@
                 <div class="video-wrapper">
                     <div class="video-frame">
                         <video controls preload="metadata" poster="assets/hero-city.png">
-                            <!-- We voorzien beide mogelijke bestandsnamen, zodat één van beide zeker werkt -->
-                            <source src="assets/SmartPark_Parkeerbeheer.mp4" type="video/mp4">
-                            <source src="assets/SmartPark_Parkeersbeheer.mp4" type="video/mp4">
+                            <!-- Nieuwe video in H.264, die je zelf her-encodeert en uploadt -->
+                            <source src="assets/SmartPark_Intro.mp4" type="video/mp4">
                             Uw browser ondersteunt de videoweergave niet. U kunt de video downloaden via
-                            <a href="assets/SmartPark_Parkeerbeheer.mp4">deze link</a>.
+                            <a href="assets/SmartPark_Intro.mp4">deze link</a>.
                         </video>
                     </div>
                     <p class="video-caption">
