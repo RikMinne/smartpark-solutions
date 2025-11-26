@@ -1,778 +1,448 @@
-<!DOCTYPE html>
-<html lang="nl" data-theme="dark">
-<head>
-  <meta charset="UTF-8" />
-  <title>SmartPark Portal</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    /* =========================
-       1. BASIS & THEME VARIABELEN
-       ========================== */
+<style>
+  /* =========================
+     1. BASIS & THEME VARIABELEN
+     ========================== */
 
-    :root[data-theme="dark"] {
-      --sp-bg: #0b1220;
-      --sp-bg-overlay: rgba(5, 10, 25, 0.75);
-      --sp-card-bg: #111827;
-      --sp-card-border: #1f2937;
-      --sp-text-main: #f9fafb;
-      --sp-text-body: #e5e7eb;
-      --sp-text-muted: #9ca3af;
-      --sp-primary: #2563eb;
-      --sp-primary-hover: #1d4ed8;
-      --sp-header-bg: rgba(11, 18, 32, 0.95);
-      --sp-chip-bg: rgba(15, 23, 42, 0.9);
-      --sp-chip-border: #1f2937;
-      --sp-chip-text: #e5e7eb;
-    }
+  :root[data-theme="dark"] {
+    /* Achtergrond & lagen */
+    --sp-bg: #020617; /* bijna-zwart navy (slate 950) */
+    --sp-bg-overlay: rgba(2, 6, 23, 0.82);
+    --sp-glow: rgba(15, 23, 42, 0.7);
 
-    :root[data-theme="light"] {
-      --sp-bg: #e5ecf4;
-      --sp-bg-overlay: rgba(229, 236, 244, 0.85);
-      --sp-card-bg: #f5f7fb;
-      --sp-card-border: #d1d5db;
-      --sp-text-main: #0f172a;
-      --sp-text-body: #1f2937;
-      --sp-text-muted: #6b7280;
-      --sp-primary: #2563eb;
-      --sp-primary-hover: #1d4ed8;
-      --sp-header-bg: rgba(229, 236, 244, 0.95);
-      --sp-chip-bg: rgba(255, 255, 255, 0.9);
-      --sp-chip-border: #d1d5db;
-      --sp-chip-text: #111827;
-    }
+    /* Kaarten */
+    --sp-card-bg: #0b1120;     /* indigo-950 */
+    --sp-card-border: #1e293b; /* slate-800 */
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    /* Tekst */
+    --sp-text-main: #f9fafb;
+    --sp-text-body: #e5e7eb;
+    --sp-text-muted: #9ca3af;
 
-    html,
-    body {
-      height: 100%;
-    }
+    /* Primair accent (lichtblauw) */
+    --sp-primary: #38bdf8;       /* sky-400 */
+    --sp-primary-hover: #0ea5e9; /* sky-500 */
 
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
-      background-color: var(--sp-bg);
-      color: var(--sp-text-body);
-      line-height: 1.5;
-    }
+    /* Header & chips */
+    --sp-header-bg: rgba(15, 23, 42, 0.96);
+    --sp-header-chip-bg: rgba(15, 23, 42, 0.8);
+    --sp-header-chip-border: rgba(148, 163, 184, 0.45);
 
-    a {
-      color: var(--sp-primary);
-      text-decoration: none;
-    }
+    --sp-chip-bg: rgba(15, 23, 42, 0.9);
+    --sp-chip-border: #1e293b;
+    --sp-chip-text: #e5e7eb;
 
-    /* =========================
-       2. ACHTERGROND & LAYOUT
-       ========================== */
+    /* Schaduw */
+    --sp-shadow-soft: 0 26px 70px rgba(15, 23, 42, 0.7);
+  }
 
-    .page {
-      min-height: 100vh;
-      position: relative;
-      overflow-x: hidden;
-    }
+  :root[data-theme="light"] {
+    /* Achtergrond & lagen */
+    --sp-bg: #d7e2f0; /* koel grijs-blauw, geen fel wit */
+    --sp-bg-overlay: rgba(215, 226, 240, 0.86);
+    --sp-glow: rgba(148, 163, 184, 0.55);
 
-    .page::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image: url("assets/hero-city.png");
-      background-size: cover;
-      background-position: center;
-      filter: blur(2px);
-      transform: scale(1.02);
-      z-index: -2;
-    }
+    /* Kaarten */
+    --sp-card-bg: #f6f8fc;     /* zacht lichtblauw/grijs */
+    --sp-card-border: #cbd5f5; /* lavendelblauw */
 
-    .page::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(
-          circle at top center,
-          rgba(15, 23, 42, 0.35),
-          transparent 55%
-        ),
-        var(--sp-bg-overlay);
-      z-index: -1;
-    }
+    /* Tekst */
+    --sp-text-main: #020617;
+    --sp-text-body: #111827;
+    --sp-text-muted: #6b7280;
 
+    /* Primair accent (klassiek blauw) */
+    --sp-primary: #2563eb;
+    --sp-primary-hover: #1d4ed8;
+
+    /* Header & chips */
+    --sp-header-bg: rgba(243, 246, 255, 0.96);
+    --sp-header-chip-bg: rgba(255, 255, 255, 0.9);
+    --sp-header-chip-border: rgba(148, 163, 184, 0.7);
+
+    --sp-chip-bg: rgba(255, 255, 255, 0.95);
+    --sp-chip-border: #cbd5f5;
+    --sp-chip-text: #0f172a;
+
+    /* Schaduw */
+    --sp-shadow-soft: 0 22px 60px rgba(148, 163, 184, 0.55);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      sans-serif;
+    background-color: var(--sp-bg);
+    color: var(--sp-text-body);
+    line-height: 1.5;
+  }
+
+  a {
+    color: var(--sp-primary);
+    text-decoration: none;
+  }
+
+  /* =========================
+     2. ACHTERGROND & LAYOUT
+     ========================== */
+
+  .page {
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  .page::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("assets/hero-city.png");
+    background-size: cover;
+    background-position: center;
+    filter: blur(2px);
+    transform: scale(1.02);
+    z-index: -2;
+  }
+
+  .page::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(
+        circle at top center,
+        var(--sp-glow),
+        transparent 55%
+      ),
+      var(--sp-bg-overlay);
+    z-index: -1;
+  }
+
+  .shell {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 96px 24px 64px;
+  }
+
+  /* =========================
+     3. HEADER
+     ========================== */
+
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    backdrop-filter: blur(14px);
+    background-color: var(--sp-header-bg);
+    border-bottom: 1px solid var(--sp-card-border);
+  }
+
+  .header-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .brand-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 20px;
+    border-radius: 18px;
+    background: linear-gradient(
+      135deg,
+      rgba(15, 23, 42, 0.98),
+      rgba(30, 64, 175, 0.92)
+    );
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.55);
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    color: #f9fafb;
+    flex-shrink: 0;
+  }
+
+  .brand-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #020617;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .brand-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .brand-text-main {
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .brand-text-sub {
+    font-size: 11px;
+    opacity: 0.9;
+  }
+
+  .header-spacer {
+    flex: 1;
+  }
+
+  .header-toggle-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px;
+    border-radius: 999px;
+    background-color: var(--sp-header-chip-bg);
+    border: 1px solid var(--sp-header-chip-border);
+  }
+
+  .toggle-btn {
+    border: none;
+    background: transparent;
+    color: var(--sp-text-muted);
+    font-size: 11px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.16s ease;
+    white-space: nowrap;
+  }
+
+  .toggle-btn.is-active {
+    background-color: var(--sp-primary);
+    color: #f9fafb;
+    box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.25),
+      0 10px 30px rgba(37, 99, 235, 0.45);
+  }
+
+  .lang-group {
+    margin-left: 10px;
+  }
+
+  .auth-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 16px;
+  }
+
+  .btn {
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.16s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+  }
+
+  .btn-primary {
+    background: var(--sp-primary);
+    color: #f9fafb;
+    box-shadow: 0 10px 26px rgba(56, 189, 248, 0.45);
+  }
+
+  .btn-primary:hover {
+    background: var(--sp-primary-hover);
+    box-shadow: 0 14px 40px rgba(56, 189, 248, 0.6);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--sp-text-body);
+    border-color: rgba(148, 163, 184, 0.6);
+  }
+
+  .btn-ghost:hover {
+    background: rgba(148, 163, 184, 0.16);
+  }
+
+  /* =========================
+     4. HERO
+     ========================== */
+
+  .hero {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
+    gap: 24px;
+  }
+
+  .card {
+    background-color: var(--sp-card-bg);
+    border-radius: 24px;
+    border: 1px solid var(--sp-card-border);
+    box-shadow: var(--sp-shadow-soft);
+    padding: 22px 26px 24px;
+  }
+
+  .card-header-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background-color: var(--sp-chip-bg);
+    border: 1px solid var(--sp-chip-border);
+    color: var(--sp-chip-text);
+    font-size: 11px;
+    margin-bottom: 14px;
+  }
+
+  .chip-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: #22c55e;
+    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.35);
+  }
+
+  .hero-title {
+    font-size: 28px;
+    line-height: 1.2;
+    font-weight: 700;
+    color: var(--sp-text-main);
+    margin-bottom: 12px;
+  }
+
+  .hero-lead {
+    font-size: 14px;
+    color: var(--sp-text-body);
+    margin-bottom: 16px;
+    max-width: 40rem;
+  }
+
+  .hero-list {
+    list-style: disc;
+    padding-left: 18px;
+    font-size: 13px;
+    color: var(--sp-text-body);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .hero-footnote {
+    margin-top: 10px;
+    font-size: 11px;
+    color: var(--sp-text-muted);
+  }
+
+  .hero-side-title {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sp-text-main);
+    margin-bottom: 10px;
+  }
+
+  .hero-side-text {
+    font-size: 13px;
+    color: var(--sp-text-body);
+  }
+
+  /* =========================
+     5. VIDEOSECTIE
+     ========================== */
+
+  .section {
+    margin-top: 40px;
+  }
+
+  .video-card {
+    margin-top: 14px;
+    border-radius: 26px;
+    background-color: var(--sp-card-bg);
+    border: 1px solid var(--sp-card-border);
+    box-shadow: var(--sp-shadow-soft);
+    padding: 18px 18px 24px;
+  }
+
+  .video-wrapper {
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #000;
+  }
+
+  video {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .section-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--sp-text-main);
+  }
+
+  .section-sub {
+    font-size: 13px;
+    color: var(--sp-text-muted);
+    margin-top: 2px;
+  }
+
+  /* =========================
+     6. FOOTER
+     ========================== */
+
+  .footer {
+    margin-top: 40px;
+    padding: 20px 0 8px;
+    font-size: 11px;
+    color: var(--sp-text-muted);
+    border-top: 1px solid rgba(148, 163, 184, 0.35);
+  }
+
+  .footer-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  /* =========================
+     7. RESPONSIVE
+     ========================== */
+
+  @media (max-width: 900px) {
     .shell {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 96px 24px 64px;
-    }
-
-    /* =========================
-       3. HEADER
-       ========================== */
-
-    .header {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      backdrop-filter: blur(12px);
-      background-color: var(--sp-header-bg);
-      border-bottom: 1px solid var(--sp-card-border);
+      padding-top: 80px;
     }
 
     .header-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 12px 24px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
+      flex-wrap: wrap;
+      gap: 10px;
     }
-
-    .brand-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 16px;
-      padding: 10px 20px;
-      border-radius: 999px;
-      background: linear-gradient(
-        135deg,
-        rgba(15, 23, 42, 0.9),
-        rgba(30, 64, 175, 0.9)
-      );
-      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.35);
-      border: 1px solid rgba(148, 163, 184, 0.2);
-      color: #f9fafb;
-      flex-shrink: 0;
-    }
-
-    .brand-logo {
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
-      overflow: hidden;
-      background: #020617;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .brand-logo img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-
-    .brand-text-main {
-      font-size: 13px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-
-    .brand-text-sub {
-      font-size: 11px;
-      opacity: 0.85;
-    }
-
-    .header-spacer {
-      flex: 1;
-    }
-
-    .header-toggle-group {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 2px;
-      border-radius: 999px;
-      background-color: rgba(15, 23, 42, 0.6);
-      border: 1px solid rgba(148, 163, 184, 0.4);
-    }
-
-    .header-toggle-group.light {
-      background-color: rgba(255, 255, 255, 0.8);
-      border-color: rgba(148, 163, 184, 0.6);
-    }
-
-    .toggle-btn {
-      border: none;
-      background: transparent;
-      color: var(--sp-text-muted);
-      font-size: 11px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      cursor: pointer;
-      transition: all 0.16s ease;
-      white-space: nowrap;
-    }
-
-    .toggle-btn.is-active {
-      background-color: var(--sp-primary);
-      color: #f9fafb;
-      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.25),
-        0 10px 30px rgba(37, 99, 235, 0.45);
-    }
-
-    .lang-group {
-      margin-left: 12px;
-    }
-
-    .auth-group {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-left: 16px;
-    }
-
-    .btn {
-      border-radius: 999px;
-      padding: 8px 16px;
-      font-size: 13px;
-      font-weight: 500;
-      border: 1px solid transparent;
-      cursor: pointer;
-      transition: all 0.16s ease;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      white-space: nowrap;
-    }
-
-    .btn-primary {
-      background: var(--sp-primary);
-      color: #f9fafb;
-      box-shadow: 0 10px 30px rgba(37, 99, 235, 0.45);
-    }
-
-    .btn-primary:hover {
-      background: var(--sp-primary-hover);
-      box-shadow: 0 12px 40px rgba(37, 99, 235, 0.55);
-    }
-
-    .btn-ghost {
-      background: transparent;
-      color: var(--sp-text-body);
-      border-color: rgba(148, 163, 184, 0.5);
-    }
-
-    .btn-ghost:hover {
-      background: rgba(148, 163, 184, 0.12);
-    }
-
-    /* =========================
-       4. HERO
-       ========================== */
 
     .hero {
-      margin-top: 40px;
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
-      gap: 24px;
+      grid-template-columns: 1fr;
     }
-
-    .card {
-      background-color: var(--sp-card-bg);
-      border-radius: 24px;
-      border: 1px solid var(--sp-card-border);
-      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.45);
-      padding: 22px 26px 24px;
-    }
-
-    .card-header-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background-color: var(--sp-chip-bg);
-      border: 1px solid var(--sp-chip-border);
-      color: var(--sp-chip-text);
-      font-size: 11px;
-      margin-bottom: 14px;
-    }
-
-    .chip-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.35);
-    }
-
-    .hero-title {
-      font-size: 28px;
-      line-height: 1.2;
-      font-weight: 700;
-      color: var(--sp-text-main);
-      margin-bottom: 12px;
-    }
-
-    .hero-lead {
-      font-size: 14px;
-      color: var(--sp-text-body);
-      margin-bottom: 16px;
-      max-width: 40rem;
-    }
-
-    .hero-list {
-      list-style: disc;
-      padding-left: 18px;
-      font-size: 13px;
-      color: var(--sp-text-body);
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .hero-footnote {
-      margin-top: 10px;
-      font-size: 11px;
-      color: var(--sp-text-muted);
-    }
-
-    .hero-side-title {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--sp-text-main);
-      margin-bottom: 10px;
-    }
-
-    .hero-side-text {
-      font-size: 13px;
-      color: var(--sp-text-body);
-    }
-
-    /* =========================
-       5. VIDEOSECTIE
-       ========================== */
-
-    .section {
-      margin-top: 40px;
-    }
-
-    .video-card {
-      margin-top: 14px;
-      border-radius: 26px;
-      background-color: var(--sp-card-bg);
-      border: 1px solid var(--sp-card-border);
-      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.45);
-      padding: 18px 18px 24px;
-    }
-
-    .video-wrapper {
-      border-radius: 20px;
-      overflow: hidden;
-      background-color: #000;
-    }
-
-    video {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
-    .section-title {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--sp-text-main);
-    }
-
-    .section-sub {
-      font-size: 13px;
-      color: var(--sp-text-muted);
-      margin-top: 2px;
-    }
-
-    /* =========================
-       6. FOOTER
-       ========================== */
-
-    .footer {
-      margin-top: 40px;
-      padding: 20px 0 8px;
-      font-size: 11px;
-      color: var(--sp-text-muted);
-      border-top: 1px solid rgba(148, 163, 184, 0.3);
-    }
-
-    .footer-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 24px;
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    /* =========================
-       7. RESPONSIVE
-       ========================== */
-
-    @media (max-width: 900px) {
-      .shell {
-        padding-top: 80px;
-      }
-
-      .header-inner {
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-
-      .hero {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="page">
-    <!-- ===== HEADER ===== -->
-    <header class="header">
-      <div class="header-inner">
-        <div class="brand-pill">
-          <div class="brand-logo">
-            <img src="assets/smartpark-logo.png" alt="SmartPark logo" />
-          </div>
-          <div>
-            <div class="brand-text-main">SMARTPARK PORTAL</div>
-            <div class="brand-text-sub">Powered by SmartPark Solutions</div>
-          </div>
-        </div>
-
-        <div class="header-spacer"></div>
-
-        <div class="header-toggle-group" id="themeGroup">
-          <button
-            class="toggle-btn is-active"
-            data-theme-btn="dark"
-            type="button"
-          >
-            Donker
-          </button>
-          <button class="toggle-btn" data-theme-btn="light" type="button">
-            Licht
-          </button>
-        </div>
-
-        <div class="header-toggle-group lang-group" id="langGroup">
-          <button
-            class="toggle-btn is-active"
-            data-lang-btn="nl"
-            type="button"
-          >
-            NL
-          </button>
-          <button class="toggle-btn" data-lang-btn="fr" type="button">FR</button>
-          <button class="toggle-btn" data-lang-btn="de" type="button">DE</button>
-          <button class="toggle-btn" data-lang-btn="en" type="button">EN</button>
-        </div>
-
-        <div class="auth-group">
-          <button class="btn btn-primary" type="button">
-            Inloggen
-          </button>
-          <button class="btn btn-ghost" type="button">
-            Toegang vragen
-          </button>
-        </div>
-      </div>
-    </header>
-
-    <!-- ===== CONTENT ===== -->
-    <main class="shell">
-      <!-- HERO -->
-      <section class="hero">
-        <article class="card">
-          <div class="card-header-chip">
-            <span class="chip-dot"></span>
-            <span
-              data-i18n="chip-main"
-              >Centraal portaal voor steden, gemeenten en interne teams</span
-            >
-          </div>
-
-          <h1 class="hero-title" data-i18n="hero-title-nl">
-            Eén centraal platform voor al uw parkeerbeheer.
-          </h1>
-
-          <p class="hero-lead" data-i18n="hero-lead-nl">
-            SmartPark Portal combineert parkeerautomaten, transacties, rapporten,
-            inspecties en storingen in één overzichtelijke omgeving. Ontworpen
-            voor mobiliteit, financiën, techniek en management — afgestemd op uw
-            dagelijkse werking.
-          </p>
-
-          <ul class="hero-list">
-            <li data-i18n="hero-b1-nl">
-              Datagedreven dashboards op basis van real-time en historische
-              gegevens.
-            </li>
-            <li data-i18n="hero-b2-nl">
-              Automatische rapporten per dienst, automaat, zone of project.
-            </li>
-            <li data-i18n="hero-b3-nl">
-              Slimme waarschuwingen bij storingen, dalende inkomsten en afwijkend
-              gedrag.
-            </li>
-            <li data-i18n="hero-b4-nl">
-              Operationele aanbevelingen op basis van patronen en trends.
-            </li>
-            <li data-i18n="hero-b5-nl">
-              FastField-inspecties gekoppeld aan automaten, tickets en
-              interventies.
-            </li>
-            <li data-i18n="hero-b6-nl">
-              Cityline-gegevens samengebracht in één beveiligd portaal.
-            </li>
-          </ul>
-
-          <p class="hero-footnote" data-i18n="hero-footnote-nl">
-            * Log in met uw bestaande account of vraag toegang aan via SmartPark
-            Solutions.
-          </p>
-        </article>
-
-        <aside class="card">
-          <div class="hero-side-title" data-i18n="side-title-nl">
-            Wat u in SmartPark Portal terugvindt
-          </div>
-          <p class="hero-side-text" data-i18n="side-text-nl">
-            SmartPark Portal geeft uw organisatie een volledig beeld van
-            inkomsten, bezetting, betalingen, storingen, tickets, interventies en
-            veldinspecties. Dashboards en rapporten zijn gestandaardiseerd maar
-            blijven dynamisch filterbaar per periode, zone, automaat,
-            betaalwijze en verantwoordelijke dienst. Automatische alerts en
-            analyses signaleren afwijkingen vroegtijdig en suggereren acties, zodat
-            u sneller kunt bijsturen en betere beslissingen kunt nemen op basis van
-            één betrouwbare bron van waarheid.
-          </p>
-        </aside>
-      </section>
-
-      <!-- VIDEO -->
-      <section class="section">
-        <header>
-          <h2 class="section-title" data-i18n="video-title-nl">
-            Korte introductievideo
-          </h2>
-          <p class="section-sub" data-i18n="video-sub-nl">
-            In deze video geven we in minder dan één minuut een overzicht van de
-            belangrijkste mogelijkheden van SmartPark Portal voor uw organisatie.
-          </p>
-        </header>
-
-        <div class="video-card">
-          <div class="video-wrapper">
-            <video
-              controls
-              poster="assets/hero-city.png"
-            >
-              <source src="assets/SmartPark_Parkeerbeheer.mp4" type="video/mp4" />
-              Uw browser ondersteunt de video-tag niet.
-            </video>
-          </div>
-        </div>
-      </section>
-
-      <!-- FOOTER -->
-      <footer class="footer">
-        <div class="footer-inner">
-          <div>© 2025 SmartPark Solutions – Alle rechten voorbehouden.</div>
-          <div>Voor professionele gebruikers: steden, gemeenten en interne teams.</div>
-        </div>
-      </footer>
-    </main>
-  </div>
-
-  <script>
-    // ============ THEME TOGGLE ============
-    (function () {
-      const root = document.documentElement;
-      const themeButtons = document.querySelectorAll("[data-theme-btn]");
-      const themeGroup = document.getElementById("themeGroup");
-
-      function applyTheme(theme) {
-        root.setAttribute("data-theme", theme);
-        localStorage.setItem("sp-theme", theme);
-
-        themeButtons.forEach((btn) => {
-          if (btn.dataset.themeBtn === theme) {
-            btn.classList.add("is-active");
-          } else {
-            btn.classList.remove("is-active");
-          }
-        });
-
-        // header-toggle styling voor licht/donker
-        if (theme === "light") {
-          themeGroup.classList.add("light");
-        } else {
-          themeGroup.classList.remove("light");
-        }
-      }
-
-      themeButtons.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          applyTheme(btn.dataset.themeBtn);
-        });
-      });
-
-      const saved = localStorage.getItem("sp-theme");
-      applyTheme(saved === "light" ? "light" : "dark");
-    })();
-
-    // ============ TAAL TOGGLE ============
-    (function () {
-      const langButtons = document.querySelectorAll("[data-lang-btn]");
-      const langGroup = document.getElementById("langGroup");
-
-      const translations = {
-        nl: {
-          "hero-title-nl":
-            "Eén centraal platform voor al uw parkeerbeheer.",
-          "hero-lead-nl":
-            "SmartPark Portal combineert parkeerautomaten, transacties, rapporten, inspecties en storingen in één overzichtelijke omgeving. Ontworpen voor mobiliteit, financiën, techniek en management — afgestemd op uw dagelijkse werking.",
-          "hero-b1-nl":
-            "Datagedreven dashboards op basis van real-time en historische gegevens.",
-          "hero-b2-nl":
-            "Automatische rapporten per dienst, automaat, zone of project.",
-          "hero-b3-nl":
-            "Slimme waarschuwingen bij storingen, dalende inkomsten en afwijkend gedrag.",
-          "hero-b4-nl":
-            "Operationele aanbevelingen op basis van patronen en trends.",
-          "hero-b5-nl":
-            "FastField-inspecties gekoppeld aan automaten, tickets en interventies.",
-          "hero-b6-nl":
-            "Cityline-gegevens samengebracht in één beveiligd portaal.",
-          "hero-footnote-nl":
-            "* Log in met uw bestaande account of vraag toegang aan via SmartPark Solutions.",
-          "side-title-nl": "Wat u in SmartPark Portal terugvindt",
-          "side-text-nl":
-            "SmartPark Portal geeft uw organisatie een volledig beeld van inkomsten, bezetting, betalingen, storingen, tickets, interventies en veldinspecties. Dashboards en rapporten zijn gestandaardiseerd maar blijven dynamisch filterbaar per periode, zone, automaat, betaalwijze en verantwoordelijke dienst. Automatische alerts en analyses signaleren afwijkingen vroegtijdig en suggereren acties, zodat u sneller kunt bijsturen en betere beslissingen kunt nemen op basis van één betrouwbare bron van waarheid.",
-          "video-title-nl": "Korte introductievideo",
-          "video-sub-nl":
-            "In deze video geven we in minder dan één minuut een overzicht van de belangrijkste mogelijkheden van SmartPark Portal voor uw organisatie.",
-          "chip-main":
-            "Centraal portaal voor steden, gemeenten en interne teams",
-        },
-        fr: {
-          "hero-title-nl":
-            "Une plateforme centrale pour toute votre gestion du stationnement.",
-          "hero-lead-nl":
-            "SmartPark Portal regroupe horodateurs, transactions, rapports, inspections et incidents dans un environnement unique et clair. Conçu pour la mobilité, les finances, la technique et la direction — aligné sur votre activité quotidienne.",
-          "hero-b1-nl":
-            "Tableaux de bord basés sur des données en temps réel et historiques.",
-          "hero-b2-nl":
-            "Rapports automatiques par service, automate, zone ou projet.",
-          "hero-b3-nl":
-            "Alertes intelligentes en cas de pannes, de baisses de revenus ou de comportements anormaux.",
-          "hero-b4-nl":
-            "Recommandations opérationnelles basées sur les tendances et les modèles.",
-          "hero-b5-nl":
-            "Inspections FastField liées aux automates, tickets et interventions.",
-          "hero-b6-nl":
-            "Données Cityline consolidées dans un portail sécurisé unique.",
-          "hero-footnote-nl":
-            "* Connectez-vous avec votre compte existant ou demandez un accès via SmartPark Solutions.",
-          "side-title-nl":
-            "Ce que vous trouverez dans SmartPark Portal",
-          "side-text-nl":
-            "SmartPark Portal offre une vue complète sur les revenus, l’occupation, les paiements, les pannes, les tickets, les interventions et les inspections sur le terrain. Les tableaux de bord et rapports sont standardisés mais restent filtrables dynamiquement par période, zone, automate, mode de paiement et service responsable. Les alertes et analyses automatiques signalent rapidement les anomalies et suggèrent des actions, afin que vous puissiez ajuster plus vite et prendre de meilleures décisions sur la base d’une source de vérité unique.",
-          "video-title-nl": "Courte vidéo de présentation",
-          "video-sub-nl":
-            "Dans cette vidéo de moins d’une minute, nous présentons les principales fonctionnalités de SmartPark Portal pour votre organisation.",
-          "chip-main":
-            "Portail central pour villes, communes et équipes internes",
-        },
-        de: {
-          "hero-title-nl":
-            "Eine zentrale Plattform für Ihr gesamtes Parkraummanagement.",
-          "hero-lead-nl":
-            "SmartPark Portal bündelt Parkscheinautomaten, Transaktionen, Berichte, Inspektionen und Störungen in einer einzigen übersichtlichen Umgebung. Entwickelt für Mobilität, Finanzen, Technik und Management – abgestimmt auf Ihren Arbeitsalltag.",
-          "hero-b1-nl":
-            "Datengetriebene Dashboards auf Basis von Echtzeit- und historischen Daten.",
-          "hero-b2-nl":
-            "Automatische Berichte pro Dienst, Automat, Zone oder Projekt.",
-          "hero-b3-nl":
-            "Intelligente Warnungen bei Störungen, sinkenden Einnahmen und abweichendem Verhalten.",
-          "hero-b4-nl":
-            "Operative Empfehlungen auf Basis von Mustern und Trends.",
-          "hero-b5-nl":
-            "FastField-Inspektionen verknüpft mit Automaten, Tickets und Einsätzen.",
-          "hero-b6-nl":
-            "Cityline-Daten in einem einzigen geschützten Portal zusammengeführt.",
-          "hero-footnote-nl":
-            "* Melden Sie sich mit Ihrem bestehenden Konto an oder beantragen Sie einen Zugang über SmartPark Solutions.",
-          "side-title-nl":
-            "Was Sie im SmartPark Portal finden",
-          "side-text-nl":
-            "SmartPark Portal gibt Ihrer Organisation einen vollständigen Überblick über Einnahmen, Auslastung, Zahlungen, Störungen, Tickets, Einsätze und Feldinspektionen. Dashboards und Berichte sind standardisiert und dennoch dynamisch nach Zeitraum, Zone, Automat, Zahlungsart und zuständigem Dienst filterbar. Automatische Hinweise und Analysen erkennen Abweichungen frühzeitig und schlagen Maßnahmen vor, damit Sie schneller nachsteuern und bessere Entscheidungen auf Basis einer einzigen zuverlässigen Datenquelle treffen können.",
-          "video-title-nl": "Kurzes Einführungsvideo",
-          "video-sub-nl":
-            "In diesem Video zeigen wir in weniger als einer Minute die wichtigsten Möglichkeiten von SmartPark Portal für Ihre Organisation.",
-          "chip-main":
-            "Zentrales Portal für Städte, Gemeinden und interne Teams",
-        },
-        en: {
-          "hero-title-nl":
-            "One central platform for all your parking operations.",
-          "hero-lead-nl":
-            "SmartPark Portal brings together parking meters, transactions, reports, inspections and incidents in a single clear environment. Designed for mobility, finance, technical teams and management — aligned with your daily operations.",
-          "hero-b1-nl":
-            "Data-driven dashboards based on real-time and historical data.",
-          "hero-b2-nl":
-            "Automatic reports per department, meter, zone or project.",
-          "hero-b3-nl":
-            "Smart alerts for failures, declining revenue and abnormal patterns.",
-          "hero-b4-nl":
-            "Operational recommendations based on trends and behaviour.",
-          "hero-b5-nl":
-            "FastField inspections linked to meters, tickets and interventions.",
-          "hero-b6-nl":
-            "Cityline data consolidated into one secure portal.",
-          "hero-footnote-nl":
-            "* Log in with your existing account or request access via SmartPark Solutions.",
-          "side-title-nl":
-            "What you will find in SmartPark Portal",
-          "side-text-nl":
-            "SmartPark Portal gives your organisation a complete view of revenue, occupancy, payments, failures, tickets, interventions and field inspections. Dashboards and reports are standardised yet remain dynamically filterable by period, zone, meter, payment method and responsible department. Automatic alerts and analytics highlight anomalies early and suggest actions, helping you adjust faster and take better decisions based on a single source of truth.",
-          "video-title-nl": "Short introduction video",
-          "video-sub-nl":
-            "In this video we give you, in under one minute, an overview of the most important SmartPark Portal capabilities for your organisation.",
-          "chip-main":
-            "Central portal for cities, municipalities and internal teams",
-        },
-      };
-
-      function applyLang(lang) {
-        const map = translations[lang] || translations.nl;
-        Object.keys(map).forEach((key) => {
-          const el = document.querySelector(`[data-i18n="${key}"]`);
-          if (el) el.textContent = map[key];
-        });
-
-        langButtons.forEach((btn) => {
-          if (btn.dataset.langBtn === lang) {
-            btn.classList.add("is-active");
-          } else {
-            btn.classList.remove("is-active");
-          }
-        });
-
-        localStorage.setItem("sp-lang", lang);
-      }
-
-      langButtons.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          applyLang(btn.dataset.langBtn);
-        });
-      });
-
-      const savedLang = localStorage.getItem("sp-lang") || "nl";
-      applyLang(savedLang);
-    })();
-  </script>
-</body>
-</html>
+  }
+</style>
