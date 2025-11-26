@@ -27,7 +27,12 @@
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             color: #e5e7eb;
-            background: #020617;
+            background:
+                    linear-gradient(to bottom right,
+                    rgba(15, 23, 42, 0.90),
+                    rgba(15, 23, 42, 0.96)),
+                    url("assets/hero-city.png") no-repeat center center fixed;
+            background-size: cover;
         }
 
         a {
@@ -51,8 +56,8 @@
             right: 0;
             backdrop-filter: blur(18px);
             background: radial-gradient(circle at top left,
-            rgba(15, 23, 42, 0.93),
-            rgba(15, 23, 42, 0.93));
+            rgba(15, 23, 42, 0.92),
+            rgba(15, 23, 42, 0.94));
             border-bottom: 1px solid rgba(148, 163, 184, 0.35);
         }
 
@@ -73,8 +78,9 @@
         }
 
         .logo-img {
-            height: 38px;
+            height: 64px;
             width: auto;
+            filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.8));
         }
 
         .brand-text-main {
@@ -87,7 +93,7 @@
         .brand-text-sub {
             font-size: 0.75rem;
             color: #cbd5f5;
-            opacity: 0.85;
+            opacity: 0.9;
         }
 
         .header-actions {
@@ -141,30 +147,29 @@
 
         .hero {
             position: relative;
-            min-height: 100vh;
+            min-height: 90vh;
             padding-top: 4.5rem; /* ruimte voor header */
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: left;
             overflow: hidden;
-            background-image:
-                    linear-gradient(to bottom right,
-                    rgba(15, 23, 42, 0.86),
-                    rgba(15, 23, 42, 0.90)),
-                    url("assets/hero-city.png");
-            background-size: cover;
-            background-position: center;
         }
 
         .hero-inner {
             max-width: 1120px;
             width: 100%;
-            padding: 2.5rem 1.5rem 3rem;
+            padding: 2.1rem 1.5rem 2.6rem;
             display: grid;
             grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-            gap: 2.5rem;
+            gap: 2.2rem;
             align-items: center;
+            background: radial-gradient(circle at top left,
+            rgba(15, 23, 42, 0.88),
+            rgba(15, 23, 42, 0.92));
+            border-radius: 24px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            box-shadow: var(--sp-shadow-soft);
         }
 
         .badge {
@@ -201,7 +206,7 @@
         }
 
         .hero-meta {
-            margin-top: 1.2rem;
+            margin-top: 1.0rem;
             font-size: 0.8rem;
             color: #9ca3af;
         }
@@ -220,11 +225,11 @@
         }
 
         .hero-card {
-            background: rgba(15, 23, 42, 0.92);
+            background: rgba(15, 23, 42, 0.95);
             border-radius: var(--sp-radius-lg);
-            padding: 1.5rem 1.4rem;
+            padding: 1.4rem 1.3rem;
             box-shadow: var(--sp-shadow-soft);
-            border: 1px solid rgba(148, 163, 184, 0.4);
+            border: 1px solid rgba(148, 163, 184, 0.45);
         }
 
         .hero-card-title {
@@ -243,11 +248,7 @@
         /* SECTIES */
 
         .section {
-            padding: 2.5rem 1.5rem 3rem;
-            background: radial-gradient(circle at top,
-            #020617,
-            #020617 60%,
-            #020617);
+            padding: 1.8rem 1.5rem 2.6rem;
         }
 
         .section-inner {
@@ -256,7 +257,7 @@
         }
 
         .section-header {
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.0rem;
         }
 
         .section-title {
@@ -268,18 +269,18 @@
 
         .section-subtitle {
             font-size: 0.9rem;
-            color: #9ca3af;
+            color: #d1d5db;
         }
 
         .video-wrapper {
-            margin-top: 1.6rem;
+            margin-top: 1.3rem;
             border-radius: var(--sp-radius-lg);
             border: 1px solid rgba(148, 163, 184, 0.4);
             background: radial-gradient(circle at top left,
-            rgba(15, 23, 42, 0.97),
-            rgba(15, 23, 42, 0.97));
+            rgba(15, 23, 42, 0.96),
+            rgba(15, 23, 42, 0.96));
             box-shadow: var(--sp-shadow-soft);
-            padding: 1.5rem;
+            padding: 1.3rem;
         }
 
         .video-frame {
@@ -298,7 +299,7 @@
         .video-caption {
             font-size: 0.8rem;
             color: #9ca3af;
-            margin-top: 0.7rem;
+            margin-top: 0.6rem;
         }
 
         /* FOOTER */
@@ -308,7 +309,7 @@
             padding: 0.9rem 1.5rem 1.3rem;
             font-size: 0.8rem;
             color: #9ca3af;
-            background: #020617;
+            background: rgba(2, 6, 23, 0.96);
         }
 
         .footer-inner {
@@ -325,7 +326,7 @@
         @media (max-width: 880px) {
             .hero-inner {
                 grid-template-columns: minmax(0, 1fr);
-                gap: 1.8rem;
+                gap: 1.5rem;
             }
 
             header .container {
@@ -414,11 +415,10 @@
 
                 <div class="video-wrapper">
                     <div class="video-frame">
-                        <video controls preload="metadata"
-                               poster="assets/hero-city.png">
-                            <source src="assets/SmartPark_Parkeersbeheer.mp4" type="video/mp4">
+                        <video controls preload="metadata" poster="assets/hero-city.png">
+                            <source src="assets/SmartPark_Parkeerbeheer.mp4" type="video/mp4">
                             Uw browser ondersteunt de videoweergave niet. U kunt de video downloaden via
-                            <a href="assets/SmartPark_Parkeersbeheer.mp4">deze link</a>.
+                            <a href="assets/SmartPark_Parkeerbeheer.mp4">deze link</a>.
                         </video>
                     </div>
                     <p class="video-caption">
