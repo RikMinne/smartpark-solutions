@@ -64,7 +64,7 @@
         .container {
             max-width: 1120px;
             margin: 0 auto;
-            padding: 0.75rem 1.5rem;
+            padding: 0.65rem 1.5rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -74,13 +74,13 @@
         .brand {
             display: flex;
             align-items: center;
-            gap: 0.65rem;
+            gap: 0.7rem;
         }
 
         .logo-img {
-            height: 64px;
+            height: 96px;
             width: auto;
-            filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.8));
+            filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.9));
         }
 
         .brand-text-main {
@@ -147,8 +147,8 @@
 
         .hero {
             position: relative;
-            min-height: 90vh;
-            padding-top: 4.5rem; /* ruimte voor header */
+            min-height: 80vh;
+            padding-top: 4.3rem; /* ruimte voor header */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -159,10 +159,10 @@
         .hero-inner {
             max-width: 1120px;
             width: 100%;
-            padding: 2.1rem 1.5rem 2.6rem;
+            padding: 1.8rem 1.5rem 2.2rem;
             display: grid;
             grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-            gap: 2.2rem;
+            gap: 1.9rem;
             align-items: center;
             background: radial-gradient(circle at top left,
             rgba(15, 23, 42, 0.88),
@@ -182,7 +182,7 @@
             background: rgba(15, 23, 42, 0.9);
             border: 1px solid rgba(148, 163, 184, 0.65);
             color: #e5e7eb;
-            margin-bottom: 0.9rem;
+            margin-bottom: 0.8rem;
         }
 
         .badge-dot {
@@ -193,20 +193,20 @@
         }
 
         .hero-title {
-            font-size: clamp(2.1rem, 3.1vw, 2.7rem);
+            font-size: clamp(2.1rem, 3.0vw, 2.6rem);
             line-height: 1.15;
-            margin-bottom: 0.65rem;
+            margin-bottom: 0.6rem;
         }
 
         .hero-subtitle {
             font-size: 0.98rem;
             color: #cbd5f5;
             max-width: 34rem;
-            margin-bottom: 1.4rem;
+            margin-bottom: 1.1rem;
         }
 
         .hero-meta {
-            margin-top: 1.0rem;
+            margin-top: 0.9rem;
             font-size: 0.8rem;
             color: #9ca3af;
         }
@@ -227,7 +227,7 @@
         .hero-card {
             background: rgba(15, 23, 42, 0.95);
             border-radius: var(--sp-radius-lg);
-            padding: 1.4rem 1.3rem;
+            padding: 1.2rem 1.1rem;
             box-shadow: var(--sp-shadow-soft);
             border: 1px solid rgba(148, 163, 184, 0.45);
         }
@@ -235,20 +235,20 @@
         .hero-card-title {
             font-size: 0.9rem;
             font-weight: 600;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.45rem;
             color: #e5e7eb;
         }
 
         .hero-card-text {
             font-size: 0.85rem;
             color: #cbd5f5;
-            line-height: 1.7;
+            line-height: 1.6;
         }
 
         /* SECTIES */
 
         .section {
-            padding: 1.8rem 1.5rem 2.6rem;
+            padding: 1.3rem 1.5rem 2.3rem;
         }
 
         .section-inner {
@@ -257,14 +257,14 @@
         }
 
         .section-header {
-            margin-bottom: 1.0rem;
+            margin-bottom: 0.9rem;
         }
 
         .section-title {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             font-weight: 600;
             color: #e5e7eb;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.2rem;
         }
 
         .section-subtitle {
@@ -273,14 +273,14 @@
         }
 
         .video-wrapper {
-            margin-top: 1.3rem;
+            margin-top: 1.0rem;
             border-radius: var(--sp-radius-lg);
             border: 1px solid rgba(148, 163, 184, 0.4);
             background: radial-gradient(circle at top left,
             rgba(15, 23, 42, 0.96),
             rgba(15, 23, 42, 0.96));
             box-shadow: var(--sp-shadow-soft);
-            padding: 1.3rem;
+            padding: 1.1rem;
         }
 
         .video-frame {
@@ -299,14 +299,14 @@
         .video-caption {
             font-size: 0.8rem;
             color: #9ca3af;
-            margin-top: 0.6rem;
+            margin-top: 0.55rem;
         }
 
         /* FOOTER */
 
         footer {
             border-top: 1px solid rgba(148, 163, 184, 0.35);
-            padding: 0.9rem 1.5rem 1.3rem;
+            padding: 0.9rem 1.5rem 1.2rem;
             font-size: 0.8rem;
             color: #9ca3af;
             background: rgba(2, 6, 23, 0.96);
@@ -326,7 +326,7 @@
         @media (max-width: 880px) {
             .hero-inner {
                 grid-template-columns: minmax(0, 1fr);
-                gap: 1.5rem;
+                gap: 1.4rem;
             }
 
             header .container {
@@ -416,7 +416,9 @@
                 <div class="video-wrapper">
                     <div class="video-frame">
                         <video controls preload="metadata" poster="assets/hero-city.png">
+                            <!-- We voorzien beide mogelijke bestandsnamen, zodat één van beide zeker werkt -->
                             <source src="assets/SmartPark_Parkeerbeheer.mp4" type="video/mp4">
+                            <source src="assets/SmartPark_Parkeersbeheer.mp4" type="video/mp4">
                             Uw browser ondersteunt de videoweergave niet. U kunt de video downloaden via
                             <a href="assets/SmartPark_Parkeerbeheer.mp4">deze link</a>.
                         </video>
