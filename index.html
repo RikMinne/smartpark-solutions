@@ -13,10 +13,10 @@
             --sp-dark: #020617;
             --sp-dark-soft: #0b1220;
             --sp-card: #0b1220;
-            --sp-card-border: rgba(148, 163, 184, 0.55);
+            --sp-card-border: rgba(148, 163, 184, 0.5);
             --sp-text-main: #e5e7eb;
             --sp-text-soft: #9ca3af;
-            --sp-shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.75);
+            --sp-shadow-soft: 0 14px 32px rgba(15, 23, 42, 0.7);
             --sp-radius-lg: 20px;
         }
 
@@ -31,8 +31,8 @@
             color: var(--sp-text-main);
             background:
                     linear-gradient(to bottom,
-                    rgba(15, 23, 42, 0.9),
-                    rgba(15, 23, 42, 0.86)),
+                    rgba(15, 23, 42, 0.75),
+                    rgba(15, 23, 42, 0.84)),
                     url("assets/hero-city.png") no-repeat center top fixed;
             background-size: cover;
         }
@@ -57,16 +57,16 @@
             right: 0;
             z-index: 40;
             background: radial-gradient(circle at top left,
-            rgba(37, 99, 235, 0.18),
-            rgba(15, 23, 42, 0.96));
+            rgba(37, 99, 235, 0.14),
+            rgba(15, 23, 42, 0.92));
             backdrop-filter: blur(18px);
-            border-bottom: 1px solid rgba(148, 163, 184, 0.55);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.5);
         }
 
         .container {
             max-width: 1120px;
             margin: 0 auto;
-            padding: 0.6rem 1.5rem;
+            padding: 0.7rem 1.5rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -76,22 +76,25 @@
         .brand {
             display: flex;
             align-items: center;
-            gap: 0.8rem;
+            gap: 0.9rem;
         }
 
         .logo-wrapper {
-            padding: 0.25rem 0.5rem;
+            padding: 0.45rem 0.9rem;
             border-radius: 999px;
-            background: radial-gradient(circle at top left,
-            rgba(248, 250, 252, 0.96),
-            rgba(226, 232, 240, 0.78));
+            background: linear-gradient(135deg,
+            rgba(248, 250, 252, 0.98),
+            rgba(226, 232, 240, 0.88));
             box-shadow:
                     0 0 0 1px rgba(15, 23, 42, 0.7),
-                    0 10px 22px rgba(15, 23, 42, 0.8);
+                    0 12px 26px rgba(15, 23, 42, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .logo-img {
-            height: 86px;   /* GROTER LOGO */
+            height: 96px; /* groter logo */
             width: auto;
             display: block;
         }
@@ -107,6 +110,12 @@
         .brand-text-sub {
             font-size: 0.8rem;
             color: #cbd5f5;
+        }
+
+        .brand-text-block {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
         }
 
         .header-right {
@@ -138,18 +147,19 @@
         .btn-primary {
             background: linear-gradient(135deg, var(--sp-primary), var(--sp-primary-dark));
             color: #f9fafb;
-            box-shadow: 0 12px 30px rgba(37, 99, 235, 0.6);
+            box-shadow: 0 6px 14px rgba(37, 99, 235, 0.55);
         }
 
         .btn-primary:hover {
             transform: translateY(-1px);
-            box-shadow: 0 16px 40px rgba(37, 99, 235, 0.75);
+            box-shadow: 0 10px 22px rgba(37, 99, 235, 0.7);
         }
 
         .btn-outline {
-            background: rgba(15, 23, 42, 0.6);
+            background: rgba(15, 23, 42, 0.55);
             color: var(--sp-text-main);
-            border-color: rgba(148, 163, 184, 0.9);
+            border-color: rgba(148, 163, 184, 0.85);
+            box-shadow: 0 4px 10px rgba(15, 23, 42, 0.6);
         }
 
         .btn-outline:hover {
@@ -164,12 +174,12 @@
         .dropdown-panel {
             position: absolute;
             right: 0;
-            top: 115%;
+            top: 120%;
             width: 280px;
             padding: 0.9rem 1rem 1rem;
             border-radius: 16px;
             background: #0b1220;
-            border: 1px solid rgba(148, 163, 184, 0.65);
+            border: 1px solid rgba(148, 163, 184, 0.6);
             box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
             display: none;
         }
@@ -244,8 +254,8 @@
         .lang-switch {
             display: inline-flex;
             border-radius: 999px;
-            background: rgba(15, 23, 42, 0.7);
-            border: 1px solid rgba(148, 163, 184, 0.85);
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.8);
             overflow: hidden;
         }
 
@@ -254,7 +264,7 @@
             background: transparent;
             color: #e5e7eb;
             font-size: 0.75rem;
-            padding: 0.2rem 0.6rem;
+            padding: 0.22rem 0.6rem;
             cursor: pointer;
             transition: background 0.12s ease, color 0.12s ease;
         }
@@ -264,7 +274,7 @@
         }
 
         .lang-btn.active {
-            background: rgba(37, 99, 235, 0.9);
+            background: rgba(37, 99, 235, 0.92);
             color: #f9fafb;
         }
 
@@ -275,7 +285,7 @@
         /* HERO */
 
         .hero {
-            padding-top: 6.1rem; /* meer afstand tot header */
+            padding-top: 7.4rem;  /* grotere afstand tot header */
             min-height: 54vh;
             display: flex;
             align-items: flex-start;
@@ -284,31 +294,31 @@
 
         .hero-inner {
             max-width: 1120px;
-            margin: 1.4rem auto 0.5rem; /* extra marge onder header */
-            padding: 1.2rem 1.5rem 1.35rem;
+            margin: 1.8rem auto 0.6rem;
+            padding: 1.25rem 1.6rem 1.4rem;
             background: radial-gradient(circle at top left,
-            rgba(17, 24, 39, 0.96),
-            rgba(15, 23, 42, 0.96));
+            rgba(17, 24, 39, 0.9),
+            rgba(15, 23, 42, 0.9));
             border-radius: var(--sp-radius-lg);
             border: 1px solid var(--sp-card-border);
             box-shadow: var(--sp-shadow-soft);
             display: grid;
             grid-template-columns: minmax(0, 1.45fr) minmax(0, 1.05fr);
             gap: 1.1rem;
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(10px);
         }
 
         .badge {
             display: inline-flex;
             align-items: center;
             gap: 0.35rem;
-            padding: 0.2rem 0.7rem;
+            padding: 0.22rem 0.8rem;
             border-radius: 999px;
             font-size: 0.72rem;
             background: rgba(15, 23, 42, 0.7);
             border: 1px solid rgba(148, 163, 184, 0.9);
             color: #e5edff;
-            margin-bottom: 0.65rem;
+            margin-bottom: 0.7rem;
         }
 
         .badge-dot {
@@ -329,12 +339,11 @@
             font-size: 0.94rem;
             color: var(--sp-text-soft);
             max-width: 35rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.55rem;
         }
 
-        /* nieuwe bullet-lijst i.p.v. pills */
         .hero-bullets {
-            margin: 0.55rem 0 0.6rem;
+            margin: 0.6rem 0 0.7rem;
             padding-left: 1.1rem;
             list-style: none;
         }
@@ -342,7 +351,7 @@
         .hero-bullets li {
             position: relative;
             padding-left: 0.9rem;
-            margin-bottom: 0.27rem;
+            margin-bottom: 0.28rem;
             font-size: 0.86rem;
             color: #e5e7eb;
         }
@@ -363,7 +372,7 @@
         }
 
         .hero-card {
-            background: rgba(15, 23, 42, 0.9);
+            background: rgba(15, 23, 42, 0.86);
             border-radius: var(--sp-radius-lg);
             padding: 0.95rem 1rem 1rem;
             border: 1px solid rgba(148, 163, 184, 0.7);
@@ -382,10 +391,10 @@
             line-height: 1.6;
         }
 
-        /* SECTIES */
+        /* VIDEOSECTIE */
 
         .section {
-            padding: 0.4rem 1.5rem 1.6rem;
+            padding: 0.6rem 1.5rem 1.7rem;
         }
 
         .section-inner {
@@ -393,26 +402,11 @@
             margin: 0 auto;
         }
 
-        .section-header {
-            margin-bottom: 0.55rem;
-        }
-
-        .section-title {
-            font-size: 1.02rem;
-            font-weight: 600;
-            color: #e5e7eb;
-        }
-
-        .section-subtitle {
-            font-size: 0.88rem;
-            color: var(--sp-text-soft);
-        }
-
         .video-wrapper {
-            margin-top: 0.55rem;
-            padding: 0.85rem;
+            margin-top: 0.4rem;
+            padding: 0.9rem;
             border-radius: var(--sp-radius-lg);
-            background: rgba(11, 18, 32, 0.95);
+            background: rgba(11, 18, 32, 0.9);
             border: 1px solid rgba(148, 163, 184, 0.7);
             box-shadow: var(--sp-shadow-soft);
             display: flex;
@@ -427,7 +421,7 @@
             border-radius: 16px;
             overflow: hidden;
             background: #020617;
-            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.9);
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.88);
         }
 
         .video-frame video {
@@ -436,19 +430,12 @@
             display: block;
         }
 
-        .video-caption {
-            font-size: 0.78rem;
-            color: var(--sp-text-soft);
-            margin-top: 0.45rem;
-            text-align: center;
-        }
-
         /* FOOTER */
 
         footer {
-            border-top: 1px solid rgba(148, 163, 184, 0.7);
+            border-top: 1px solid rgba(148, 163, 184, 0.6);
             padding: 0.75rem 1.5rem 1rem;
-            background: rgba(2, 6, 23, 0.96);
+            background: rgba(2, 6, 23, 0.94);
         }
 
         .footer-inner {
@@ -469,6 +456,10 @@
                 grid-template-columns: minmax(0, 1fr);
                 gap: 0.9rem;
             }
+
+            .video-frame {
+                width: 100%;
+            }
         }
 
         @media (max-width: 720px) {
@@ -484,20 +475,16 @@
             }
 
             .logo-img {
-                height: 76px;
+                height: 82px;
             }
 
             .hero {
-                padding-top: 5.3rem;
+                padding-top: 6.5rem;
             }
 
             .hero-inner {
-                margin-top: 1rem;
-                padding: 1rem 1.1rem 1.1rem;
-            }
-
-            .video-frame {
-                width: 100%;
+                margin-top: 1.4rem;
+                padding: 1.05rem 1.1rem 1.1rem;
             }
         }
 
@@ -511,7 +498,7 @@
             }
 
             .lang-switch {
-                display: none; /* op echt kleine schermen wordt taalkeuze eenvoudiger later */
+                display: none;
             }
         }
     </style>
@@ -525,7 +512,7 @@
                 <div class="logo-wrapper">
                     <img src="assets/smartpark-logo.png" alt="SmartPark Solutions logo" class="logo-img">
                 </div>
-                <div>
+                <div class="brand-text-block">
                     <div class="brand-text-main">SmartPark Portal</div>
                     <div class="brand-text-sub">Powered by SmartPark Solutions</div>
                 </div>
@@ -543,25 +530,36 @@
                 <div class="header-actions">
                     <!-- Inloggen -->
                     <div class="header-action-group" data-group="login">
-                        <button class="btn btn-primary" type="button" data-toggle="dropdown-login">Inloggen</button>
+                        <button class="btn btn-primary" type="button" data-toggle="dropdown-login" data-i18n="btn.login">
+                            Inloggen
+                        </button>
                         <div class="dropdown-panel">
-                            <div class="dropdown-title">Inloggen op SmartPark Portal</div>
-                            <div class="dropdown-description">
+                            <div class="dropdown-title" data-i18n="login.title">
+                                Inloggen op SmartPark Portal
+                            </div>
+                            <div class="dropdown-description" data-i18n="login.desc">
                                 Vul uw gebruikersnaam of e-mail en wachtwoord in om verder te gaan.
                             </div>
                             <form>
                                 <div class="field-group">
-                                    <label for="login-username">Gebruikersnaam of e-mail</label>
+                                    <label for="login-username" data-i18n="login.usernameLabel">
+                                        Gebruikersnaam of e-mail
+                                    </label>
                                     <input id="login-username" type="text" autocomplete="username">
                                 </div>
                                 <div class="field-group">
-                                    <label for="login-password">Wachtwoord</label>
+                                    <label for="login-password" data-i18n="login.passwordLabel">
+                                        Wachtwoord
+                                    </label>
                                     <input id="login-password" type="password" autocomplete="current-password">
                                 </div>
                                 <div class="dropdown-footer">
-                                    <small><a href="#" style="color:#60a5fa;">Wachtwoord vergeten?</a></small>
+                                    <small><a href="#" style="color:#60a5fa;" data-i18n="login.forgot">
+                                        Wachtwoord vergeten?
+                                    </a></small>
                                     <button type="button" class="btn btn-primary"
-                                            style="padding:0.4rem 0.9rem;font-size:0.8rem;">
+                                            style="padding:0.4rem 0.9rem;font-size:0.8rem;"
+                                            data-i18n="login.button">
                                         Inloggen
                                     </button>
                                 </div>
@@ -571,49 +569,85 @@
 
                     <!-- Toegang vragen -->
                     <div class="header-action-group" data-group="request">
-                        <button class="btn btn-outline" type="button" data-toggle="dropdown-request">Toegang vragen</button>
+                        <button class="btn btn-outline" type="button"
+                                data-toggle="dropdown-request" data-i18n="btn.request">
+                            Toegang vragen
+                        </button>
                         <div class="dropdown-panel">
-                            <div class="dropdown-title">Toegang aanvragen</div>
-                            <div class="dropdown-description">
+                            <div class="dropdown-title" data-i18n="req.title">
+                                Toegang aanvragen
+                            </div>
+                            <div class="dropdown-description" data-i18n="req.desc">
                                 Vraag een SmartPark Portal-account aan. We nemen contact met u op na validatie.
                             </div>
                             <form>
                                 <div class="field-group">
-                                    <label for="req-org">Organisatie</label>
-                                    <input id="req-org" type="text" placeholder="Stad / gemeente / organisatie">
+                                    <label for="req-org" data-i18n="req.orgLabel">
+                                        Organisatie
+                                    </label>
+                                    <input id="req-org" type="text"
+                                           placeholder="Stad / gemeente / organisatie"
+                                           data-i18n-placeholder="req.orgPlaceholder">
                                 </div>
                                 <div class="field-group">
-                                    <label for="req-name">Contactpersoon</label>
-                                    <input id="req-name" type="text" placeholder="Naam">
+                                    <label for="req-name" data-i18n="req.nameLabel">
+                                        Contactpersoon
+                                    </label>
+                                    <input id="req-name" type="text" placeholder="Naam"
+                                           data-i18n-placeholder="req.namePlaceholder">
                                 </div>
                                 <div class="field-group">
-                                    <label for="req-email">E-mail</label>
-                                    <input id="req-email" type="email" placeholder="naam@organisatie.be">
+                                    <label for="req-email" data-i18n="req.emailLabel">
+                                        E-mail
+                                    </label>
+                                    <input id="req-email" type="email" placeholder="naam@organisatie.be"
+                                           data-i18n-placeholder="req.emailPlaceholder">
                                 </div>
                                 <div class="field-group">
-                                    <label for="req-phone">Telefoon (optioneel)</label>
-                                    <input id="req-phone" type="tel" placeholder="+32 ...">
+                                    <label for="req-phone" data-i18n="req.phoneLabel">
+                                        Telefoon (optioneel)
+                                    </label>
+                                    <input id="req-phone" type="tel" placeholder="+32 ..."
+                                           data-i18n-placeholder="req.phonePlaceholder">
                                 </div>
                                 <div class="field-group">
-                                    <label for="req-role">Rol</label>
+                                    <label for="req-role" data-i18n="req.roleLabel">
+                                        Rol
+                                    </label>
                                     <select id="req-role">
-                                        <option value="">Kies uw rol</option>
-                                        <option>Stad / gemeente – dienst mobiliteit</option>
-                                        <option>Stad / gemeente – financiële dienst</option>
-                                        <option>Stad / gemeente – technische dienst</option>
-                                        <option>Rauwers / interne medewerker</option>
-                                        <option>Partner / leverancier</option>
+                                        <option value="" data-i18n="req.roleOption0">Kies uw rol</option>
+                                        <option data-i18n="req.roleOption1">
+                                            Stad / gemeente – dienst mobiliteit
+                                        </option>
+                                        <option data-i18n="req.roleOption2">
+                                            Stad / gemeente – financiële dienst
+                                        </option>
+                                        <option data-i18n="req.roleOption3">
+                                            Stad / gemeente – technische dienst
+                                        </option>
+                                        <option data-i18n="req.roleOption4">
+                                            Rauwers / interne medewerker
+                                        </option>
+                                        <option data-i18n="req.roleOption5">
+                                            Partner / leverancier
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="field-group">
-                                    <label for="req-notes">Korte toelichting</label>
+                                    <label for="req-notes" data-i18n="req.notesLabel">
+                                        Korte toelichting
+                                    </label>
                                     <textarea id="req-notes"
-                                              placeholder="Welke toegang heeft u nodig? Voor welke automaten / projecten?"></textarea>
+                                              placeholder="Welke toegang heeft u nodig? Voor welke automaten / projecten?"
+                                              data-i18n-placeholder="req.notesPlaceholder"></textarea>
                                 </div>
                                 <div class="dropdown-footer">
-                                    <small>Uw aanvraag wordt beoordeeld door SmartPark Solutions.</small>
+                                    <small data-i18n="req.footerNote">
+                                        Uw aanvraag wordt beoordeeld door SmartPark Solutions.
+                                    </small>
                                     <button type="button" class="btn btn-primary"
-                                            style="padding:0.4rem 0.9rem;font-size:0.8rem;">
+                                            style="padding:0.4rem 0.9rem;font-size:0.8rem;"
+                                            data-i18n="req.button">
                                         Aanvraag indienen
                                     </button>
                                 </div>
@@ -632,35 +666,53 @@
                 <div>
                     <div class="badge">
                         <span class="badge-dot"></span>
-                        <span>Centraal portaal voor steden, gemeenten en interne teams</span>
+                        <span data-i18n="badge.text">
+                            Centraal portaal voor steden, gemeenten en interne teams
+                        </span>
                     </div>
-                    <h1 class="hero-title">Eén centraal platform voor al uw parkeerbeheer.</h1>
-                    <p class="hero-subtitle">
+                    <h1 class="hero-title" data-i18n="hero.title">
+                        Eén centraal platform voor al uw parkeerbeheer.
+                    </h1>
+                    <p class="hero-subtitle" data-i18n="hero.subtitle">
                         SmartPark Portal combineert parkeerautomaten, transacties, rapporten, inspecties en storingen
                         in één overzichtelijke omgeving. Ontworpen voor mobiliteit, financiën, techniek en management —
                         afgestemd op uw dagelijkse werking.
                     </p>
 
                     <ul class="hero-bullets">
-                        <li>Datagedreven dashboards op basis van real-time en historische gegevens.</li>
-                        <li>Automatische rapporten per dienst, automaat, zone of project.</li>
-                        <li>Slimme waarschuwingen bij storingen, dalende inkomsten en afwijkend gedrag.</li>
-                        <li>Operationele aanbevelingen op basis van patronen en trends.</li>
-                        <li>FastField-inspecties gekoppeld aan automaten, tickets en interventies.</li>
-                        <li>Cityline-gegevens samengebracht in één beveiligd portaal.</li>
+                        <li data-i18n="bullet.1">
+                            Datagedreven dashboards op basis van real-time en historische gegevens.
+                        </li>
+                        <li data-i18n="bullet.2">
+                            Automatische rapporten per dienst, automaat, zone of project.
+                        </li>
+                        <li data-i18n="bullet.3">
+                            Slimme waarschuwingen bij storingen, dalende inkomsten en afwijkend gedrag.
+                        </li>
+                        <li data-i18n="bullet.4">
+                            Operationele aanbevelingen op basis van patronen en trends.
+                        </li>
+                        <li data-i18n="bullet.5">
+                            FastField-inspecties gekoppeld aan automaten, tickets en interventies.
+                        </li>
+                        <li data-i18n="bullet.6">
+                            Cityline-gegevens samengebracht in één beveiligd portaal.
+                        </li>
                     </ul>
 
-                    <div class="hero-meta">
+                    <div class="hero-meta" data-i18n="hero.meta">
                         * Log in met uw bestaande account of vraag toegang aan via SmartPark Solutions.
                     </div>
                 </div>
                 <div class="hero-card">
-                    <div class="hero-card-title">Wat u in SmartPark Portal terugvindt</div>
-                    <p class="hero-card-text">
-                        SmartPark Portal geeft uw organisatie een volledig beeld van inkomsten, bezetting,
-                        betalingen, storingen, tickets, interventies en veldinspecties. Dashboards en rapporten zijn
-                        standaard opgebouwd maar blijven dynamisch filterbaar per periode, zone, automaat, betaalwijze
-                        en verantwoordelijke dienst. Automatische alerts en analyses signaleren afwijkingen vroegtijdig
+                    <div class="hero-card-title" data-i18n="heroCard.title">
+                        Wat u in SmartPark Portal terugvindt
+                    </div>
+                    <p class="hero-card-text" data-i18n="heroCard.text">
+                        SmartPark Portal geeft uw organisatie een volledig beeld van inkomsten, bezetting, betalingen,
+                        storingen, tickets, interventies en veldinspecties. Dashboards en rapporten zijn standaard
+                        opgebouwd maar blijven dynamisch filterbaar per periode, zone, automaat, betaalwijze en
+                        verantwoordelijke dienst. Automatische alerts en analyses signaleren afwijkingen vroegtijdig
                         en suggereren acties, zodat u sneller kunt bijsturen en betere beslissingen kunt nemen op basis
                         van één betrouwbare bron van waarheid.
                     </p>
@@ -668,29 +720,15 @@
             </div>
         </section>
 
-        <!-- VIDEOSECTIE -->
+        <!-- VIDEOSECTIE (zonder extra tekst) -->
         <section class="section" id="video">
             <div class="section-inner">
-                <div class="section-header">
-                    <h2 class="section-title">Korte introductievideo</h2>
-                    <p class="section-subtitle">
-                        In deze video geven we in minder dan één minuut een overzicht van de belangrijkste mogelijkheden
-                        van SmartPark Portal voor uw organisatie.
-                    </p>
-                </div>
-
                 <div class="video-wrapper">
-                    <div>
-                        <div class="video-frame">
-                            <video controls preload="metadata" poster="assets/hero-city.png">
-                                <source src="assets/SmartPark_Parkeerbeheer.mp4" type="video/mp4">
-                                Uw browser ondersteunt de videoweergave niet.
-                            </video>
-                        </div>
-                        <p class="video-caption">
-                            De video wordt gehost binnen SmartPark Solutions en is bedoeld voor professionele
-                            gebruikers: steden, gemeenten en interne teams.
-                        </p>
+                    <div class="video-frame">
+                        <video controls preload="metadata" poster="assets/hero-city.png">
+                            <source src="assets/SmartPark_Parkeerbeheer.mp4" type="video/mp4">
+                            Uw browser ondersteunt de videoweergave niet.
+                        </video>
                     </div>
                 </div>
             </div>
@@ -700,8 +738,12 @@
     <!-- FOOTER -->
     <footer>
         <div class="footer-inner">
-            <span>© <span id="year"></span> SmartPark Solutions – Alle rechten voorbehouden.</span>
-            <span>Voor professionele gebruikers: steden, gemeenten en interne teams.</span>
+            <span data-i18n="footer.left">
+                © <span id="year"></span> SmartPark Solutions – Alle rechten voorbehouden.
+            </span>
+            <span data-i18n="footer.right">
+                Voor professionele gebruikers: steden, gemeenten en interne teams.
+            </span>
         </div>
     </footer>
 </div>
@@ -735,7 +777,256 @@
         }
     });
 
-    // taalkeuze – voorlopig enkel visueel + lang-attribuut
+    // i18n teksten
+    const translations = {
+        nl: {
+            "btn.login": "Inloggen",
+            "btn.request": "Toegang vragen",
+
+            "badge.text": "Centraal portaal voor steden, gemeenten en interne teams",
+
+            "hero.title": "Eén centraal platform voor al uw parkeerbeheer.",
+            "hero.subtitle":
+                "SmartPark Portal combineert parkeerautomaten, transacties, rapporten, inspecties en storingen in één overzichtelijke omgeving. Ontworpen voor mobiliteit, financiën, techniek en management — afgestemd op uw dagelijkse werking.",
+            "bullet.1": "Datagedreven dashboards op basis van real-time en historische gegevens.",
+            "bullet.2": "Automatische rapporten per dienst, automaat, zone of project.",
+            "bullet.3": "Slimme waarschuwingen bij storingen, dalende inkomsten en afwijkend gedrag.",
+            "bullet.4": "Operationele aanbevelingen op basis van patronen en trends.",
+            "bullet.5": "FastField-inspecties gekoppeld aan automaten, tickets en interventies.",
+            "bullet.6": "Cityline-gegevens samengebracht in één beveiligd portaal.",
+            "hero.meta": "* Log in met uw bestaande account of vraag toegang aan via SmartPark Solutions.",
+
+            "heroCard.title": "Wat u in SmartPark Portal terugvindt",
+            "heroCard.text":
+                "SmartPark Portal geeft uw organisatie een volledig beeld van inkomsten, bezetting, betalingen, storingen, tickets, interventies en veldinspecties. Dashboards en rapporten zijn standaard opgebouwd maar blijven dynamisch filterbaar per periode, zone, automaat, betaalwijze en verantwoordelijke dienst. Automatische alerts en analyses signaleren afwijkingen vroegtijdig en suggereren acties, zodat u sneller kunt bijsturen en betere beslissingen kunt nemen op basis van één betrouwbare bron van waarheid.",
+
+            "login.title": "Inloggen op SmartPark Portal",
+            "login.desc": "Vul uw gebruikersnaam of e-mail en wachtwoord in om verder te gaan.",
+            "login.usernameLabel": "Gebruikersnaam of e-mail",
+            "login.passwordLabel": "Wachtwoord",
+            "login.forgot": "Wachtwoord vergeten?",
+            "login.button": "Inloggen",
+
+            "req.title": "Toegang aanvragen",
+            "req.desc": "Vraag een SmartPark Portal-account aan. We nemen contact met u op na validatie.",
+            "req.orgLabel": "Organisatie",
+            "req.orgPlaceholder": "Stad / gemeente / organisatie",
+            "req.nameLabel": "Contactpersoon",
+            "req.namePlaceholder": "Naam",
+            "req.emailLabel": "E-mail",
+            "req.emailPlaceholder": "naam@organisatie.be",
+            "req.phoneLabel": "Telefoon (optioneel)",
+            "req.phonePlaceholder": "+32 ...",
+            "req.roleLabel": "Rol",
+            "req.roleOption0": "Kies uw rol",
+            "req.roleOption1": "Stad / gemeente – dienst mobiliteit",
+            "req.roleOption2": "Stad / gemeente – financiële dienst",
+            "req.roleOption3": "Stad / gemeente – technische dienst",
+            "req.roleOption4": "Rauwers / interne medewerker",
+            "req.roleOption5": "Partner / leverancier",
+            "req.notesLabel": "Korte toelichting",
+            "req.notesPlaceholder":
+                "Welke toegang heeft u nodig? Voor welke automaten / projecten?",
+            "req.footerNote": "Uw aanvraag wordt beoordeeld door SmartPark Solutions.",
+            "req.button": "Aanvraag indienen",
+
+            "footer.left": "© " + new Date().getFullYear() + " SmartPark Solutions – Alle rechten voorbehouden.",
+            "footer.right": "Voor professionele gebruikers: steden, gemeenten en interne teams."
+        },
+        fr: {
+            "btn.login": "Se connecter",
+            "btn.request": "Demander un accès",
+
+            "badge.text": "Portail central pour villes, communes et équipes internes",
+
+            "hero.title": "Une plateforme centrale pour toute votre gestion du stationnement.",
+            "hero.subtitle":
+                "SmartPark Portal regroupe horodateurs, transactions, rapports, inspections et incidents dans un environnement unique et clair. Conçu pour la mobilité, les finances, la technique et la direction — adapté à votre fonctionnement quotidien.",
+            "bullet.1": "Tableaux de bord basés sur des données en temps réel et historiques.",
+            "bullet.2": "Rapports automatiques par service, automate, zone ou projet.",
+            "bullet.3": "Alertes intelligentes en cas de pannes, baisse des recettes ou comportement atypique.",
+            "bullet.4": "Recommandations opérationnelles basées sur des modèles et des tendances.",
+            "bullet.5": "Inspections FastField liées aux automates, tickets et interventions.",
+            "bullet.6": "Données Cityline rassemblées dans un portail sécurisé unique.",
+            "hero.meta":
+                "* Connectez-vous avec votre compte existant ou demandez un accès via SmartPark Solutions.",
+
+            "heroCard.title": "Ce que vous trouvez dans SmartPark Portal",
+            "heroCard.text":
+                "SmartPark Portal offre à votre organisation une vue complète des recettes, de l’occupation, des paiements, des pannes, des tickets, des interventions et des inspections de terrain. Les tableaux de bord et rapports sont standardisés mais restent filtrables dynamiquement par période, zone, automate, moyen de paiement et service responsable. Des alertes et analyses automatiques signalent rapidement les écarts et suggèrent des actions, afin que vous puissiez ajuster plus vite et prendre de meilleures décisions sur la base d’une source unique de vérité.",
+
+            "login.title": "Se connecter à SmartPark Portal",
+            "login.desc":
+                "Saisissez votre nom d’utilisateur ou e-mail et votre mot de passe pour continuer.",
+            "login.usernameLabel": "Nom d’utilisateur ou e-mail",
+            "login.passwordLabel": "Mot de passe",
+            "login.forgot": "Mot de passe oublié ?",
+            "login.button": "Se connecter",
+
+            "req.title": "Demander un accès",
+            "req.desc":
+                "Demandez un compte SmartPark Portal. Nous vous contacterons après validation.",
+            "req.orgLabel": "Organisation",
+            "req.orgPlaceholder": "Ville / commune / organisation",
+            "req.nameLabel": "Personne de contact",
+            "req.namePlaceholder": "Nom",
+            "req.emailLabel": "E-mail",
+            "req.emailPlaceholder": "nom@organisation.be",
+            "req.phoneLabel": "Téléphone (facultatif)",
+            "req.phonePlaceholder": "+32 ...",
+            "req.roleLabel": "Rôle",
+            "req.roleOption0": "Choisissez votre rôle",
+            "req.roleOption1": "Ville / commune – service mobilité",
+            "req.roleOption2": "Ville / commune – service finances",
+            "req.roleOption3": "Ville / commune – service technique",
+            "req.roleOption4": "Rauwers / collaborateur interne",
+            "req.roleOption5": "Partenaire / fournisseur",
+            "req.notesLabel": "Brève description",
+            "req.notesPlaceholder":
+                "De quel type d’accès avez-vous besoin ? Pour quels automates / projets ?",
+            "req.footerNote": "Votre demande sera examinée par SmartPark Solutions.",
+            "req.button": "Envoyer la demande",
+
+            "footer.left": "© " + new Date().getFullYear() + " SmartPark Solutions – Tous droits réservés.",
+            "footer.right": "Pour utilisateurs professionnels : villes, communes et équipes internes."
+        },
+        de: {
+            "btn.login": "Anmelden",
+            "btn.request": "Zugang anfragen",
+
+            "badge.text": "Zentrales Portal für Städte, Gemeinden und interne Teams",
+
+            "hero.title": "Eine zentrale Plattform für Ihr gesamtes Parkraummanagement.",
+            "hero.subtitle":
+                "SmartPark Portal bündelt Parkscheinautomaten, Transaktionen, Berichte, Inspektionen und Störungen in einer übersichtlichen Umgebung. Entwickelt für Mobilität, Finanzen, Technik und Management – abgestimmt auf Ihren täglichen Betrieb.",
+            "bullet.1": "Datengetriebene Dashboards auf Basis von Echtzeit- und historischen Daten.",
+            "bullet.2": "Automatische Berichte pro Dienst, Automat, Zone oder Projekt.",
+            "bullet.3": "Intelligente Warnungen bei Störungen, sinkenden Einnahmen und Auffälligkeiten.",
+            "bullet.4": "Operative Empfehlungen auf Basis von Mustern und Trends.",
+            "bullet.5": "FastField-Inspektionen verknüpft mit Automaten, Tickets und Interventionen.",
+            "bullet.6": "Cityline-Daten gebündelt in einem geschützten Portal.",
+            "hero.meta":
+                "* Melden Sie sich mit Ihrem bestehenden Konto an oder beantragen Sie den Zugang über SmartPark Solutions.",
+
+            "heroCard.title": "Was Sie im SmartPark Portal finden",
+            "heroCard.text":
+                "SmartPark Portal bietet Ihrer Organisation einen vollständigen Überblick über Einnahmen, Auslastung, Zahlungen, Störungen, Tickets, Interventionen und Vor-Ort-Inspektionen. Dashboards und Berichte sind standardisiert, bleiben jedoch dynamisch filterbar nach Zeitraum, Zone, Automat, Zahlungsart und zuständigem Dienst. Automatische Alarme und Analysen erkennen Abweichungen frühzeitig und schlagen Maßnahmen vor, sodass Sie schneller nachsteuern und bessere Entscheidungen auf Basis einer einzigen verlässlichen Datenquelle treffen können.",
+
+            "login.title": "Anmeldung im SmartPark Portal",
+            "login.desc":
+                "Geben Sie Ihren Benutzernamen oder Ihre E-Mail-Adresse und Ihr Passwort ein, um fortzufahren.",
+            "login.usernameLabel": "Benutzername oder E-Mail",
+            "login.passwordLabel": "Passwort",
+            "login.forgot": "Passwort vergessen?",
+            "login.button": "Anmelden",
+
+            "req.title": "Zugang anfragen",
+            "req.desc":
+                "Fordern Sie ein SmartPark Portal-Konto an. Wir kontaktieren Sie nach der Prüfung.",
+            "req.orgLabel": "Organisation",
+            "req.orgPlaceholder": "Stadt / Gemeinde / Organisation",
+            "req.nameLabel": "Ansprechperson",
+            "req.namePlaceholder": "Name",
+            "req.emailLabel": "E-Mail",
+            "req.emailPlaceholder": "name@organisation.be",
+            "req.phoneLabel": "Telefon (optional)",
+            "req.phonePlaceholder": "+49 ...",
+            "req.roleLabel": "Rolle",
+            "req.roleOption0": "Rolle auswählen",
+            "req.roleOption1": "Stadt / Gemeinde – Mobilitätsdienst",
+            "req.roleOption2": "Stadt / Gemeinde – Finanzdienst",
+            "req.roleOption3": "Stadt / Gemeinde – Technikdienst",
+            "req.roleOption4": "Rauwers / interne Mitarbeiter",
+            "req.roleOption5": "Partner / Lieferant",
+            "req.notesLabel": "Kurze Erläuterung",
+            "req.notesPlaceholder":
+                "Welchen Zugang benötigen Sie? Für welche Automaten / Projekte?",
+            "req.footerNote":
+                "Ihre Anfrage wird von SmartPark Solutions geprüft.",
+            "req.button": "Anfrage senden",
+
+            "footer.left": "© " + new Date().getFullYear() + " SmartPark Solutions – Alle Rechte vorbehalten.",
+            "footer.right": "Für professionelle Nutzer: Städte, Gemeinden und interne Teams."
+        },
+        en: {
+            "btn.login": "Log in",
+            "btn.request": "Request access",
+
+            "badge.text": "Central portal for cities, municipalities and internal teams",
+
+            "hero.title": "One central platform for all your parking operations.",
+            "hero.subtitle":
+                "SmartPark Portal brings together parking meters, transactions, reports, inspections and incidents in a single clear environment. Designed for mobility, finance, technical teams and management—aligned with your daily operations.",
+            "bullet.1": "Data-driven dashboards based on real-time and historical data.",
+            "bullet.2": "Automatic reports per department, meter, zone or project.",
+            "bullet.3": "Smart alerts for failures, declining revenue and abnormal patterns.",
+            "bullet.4": "Operational recommendations based on trends and behaviour.",
+            "bullet.5": "FastField inspections linked to meters, tickets and interventions.",
+            "bullet.6": "Cityline data consolidated into one secure portal.",
+            "hero.meta":
+                "* Log in with your existing account or request access via SmartPark Solutions.",
+
+            "heroCard.title": "What you will find in SmartPark Portal",
+            "heroCard.text":
+                "SmartPark Portal gives your organisation a complete view of revenue, occupancy, payments, failures, tickets, interventions and field inspections. Dashboards and reports are standardised but remain dynamically filterable by period, zone, meter, payment method and responsible department. Automatic alerts and analytics highlight anomalies early and suggest actions, helping you adjust faster and take better decisions based on a single source of truth.",
+
+            "login.title": "Log in to SmartPark Portal",
+            "login.desc":
+                "Enter your username or e-mail address and password to continue.",
+            "login.usernameLabel": "Username or e-mail",
+            "login.passwordLabel": "Password",
+            "login.forgot": "Forgot your password?",
+            "login.button": "Log in",
+
+            "req.title": "Request access",
+            "req.desc":
+                "Request a SmartPark Portal account. We will contact you after validation.",
+            "req.orgLabel": "Organisation",
+            "req.orgPlaceholder": "City / municipality / organisation",
+            "req.nameLabel": "Contact person",
+            "req.namePlaceholder": "Name",
+            "req.emailLabel": "E-mail",
+            "req.emailPlaceholder": "name@organisation.be",
+            "req.phoneLabel": "Phone (optional)",
+            "req.phonePlaceholder": "+32 ...",
+            "req.roleLabel": "Role",
+            "req.roleOption0": "Select your role",
+            "req.roleOption1": "City / municipality – mobility department",
+            "req.roleOption2": "City / municipality – finance department",
+            "req.roleOption3": "City / municipality – technical department",
+            "req.roleOption4": "Rauwers / internal staff",
+            "req.roleOption5": "Partner / supplier",
+            "req.notesLabel": "Short description",
+            "req.notesPlaceholder":
+                "Which access do you need? For which meters / projects?",
+            "req.footerNote":
+                "Your request will be reviewed by SmartPark Solutions.",
+            "req.button": "Submit request",
+
+            "footer.left": "© " + new Date().getFullYear() + " SmartPark Solutions – All rights reserved.",
+            "footer.right": "For professional users: cities, municipalities and internal teams."
+        }
+    };
+
+    function applyTranslations(lang) {
+        const dict = translations[lang] || translations["nl"];
+
+        document.querySelectorAll("[data-i18n]").forEach(el => {
+            const key = el.getAttribute("data-i18n");
+            if (dict[key]) {
+                el.textContent = dict[key];
+            }
+        });
+
+        document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+            const key = el.getAttribute("data-i18n-placeholder");
+            if (dict[key]) {
+                el.placeholder = dict[key];
+            }
+        });
+    }
+
+    // taal-knoppen
     const langButtons = document.querySelectorAll(".lang-btn");
     langButtons.forEach(btn => {
         btn.addEventListener("click", () => {
@@ -743,9 +1034,12 @@
             btn.classList.add("active");
             const lang = btn.dataset.lang || "nl";
             document.documentElement.lang = lang;
-            // In een volgende stap kunnen we hier de teksten dynamisch wisselen per taal.
+            applyTranslations(lang);
         });
     });
+
+    // initial NL
+    applyTranslations("nl");
 </script>
 </body>
 </html>
