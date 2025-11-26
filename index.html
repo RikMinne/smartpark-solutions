@@ -1,448 +1,1186 @@
-<style>
-  /* =========================
-     1. BASIS & THEME VARIABELEN
-     ========================== */
-
-  :root[data-theme="dark"] {
-    /* Achtergrond & lagen */
-    --sp-bg: #020617; /* bijna-zwart navy (slate 950) */
-    --sp-bg-overlay: rgba(2, 6, 23, 0.82);
-    --sp-glow: rgba(15, 23, 42, 0.7);
-
-    /* Kaarten */
-    --sp-card-bg: #0b1120;     /* indigo-950 */
-    --sp-card-border: #1e293b; /* slate-800 */
-
-    /* Tekst */
-    --sp-text-main: #f9fafb;
-    --sp-text-body: #e5e7eb;
-    --sp-text-muted: #9ca3af;
-
-    /* Primair accent (lichtblauw) */
-    --sp-primary: #38bdf8;       /* sky-400 */
-    --sp-primary-hover: #0ea5e9; /* sky-500 */
-
-    /* Header & chips */
-    --sp-header-bg: rgba(15, 23, 42, 0.96);
-    --sp-header-chip-bg: rgba(15, 23, 42, 0.8);
-    --sp-header-chip-border: rgba(148, 163, 184, 0.45);
-
-    --sp-chip-bg: rgba(15, 23, 42, 0.9);
-    --sp-chip-border: #1e293b;
-    --sp-chip-text: #e5e7eb;
-
-    /* Schaduw */
-    --sp-shadow-soft: 0 26px 70px rgba(15, 23, 42, 0.7);
-  }
-
-  :root[data-theme="light"] {
-    /* Achtergrond & lagen */
-    --sp-bg: #d7e2f0; /* koel grijs-blauw, geen fel wit */
-    --sp-bg-overlay: rgba(215, 226, 240, 0.86);
-    --sp-glow: rgba(148, 163, 184, 0.55);
-
-    /* Kaarten */
-    --sp-card-bg: #f6f8fc;     /* zacht lichtblauw/grijs */
-    --sp-card-border: #cbd5f5; /* lavendelblauw */
-
-    /* Tekst */
-    --sp-text-main: #020617;
-    --sp-text-body: #111827;
-    --sp-text-muted: #6b7280;
-
-    /* Primair accent (klassiek blauw) */
-    --sp-primary: #2563eb;
-    --sp-primary-hover: #1d4ed8;
-
-    /* Header & chips */
-    --sp-header-bg: rgba(243, 246, 255, 0.96);
-    --sp-header-chip-bg: rgba(255, 255, 255, 0.9);
-    --sp-header-chip-border: rgba(148, 163, 184, 0.7);
-
-    --sp-chip-bg: rgba(255, 255, 255, 0.95);
-    --sp-chip-border: #cbd5f5;
-    --sp-chip-text: #0f172a;
-
-    /* Schaduw */
-    --sp-shadow-soft: 0 22px 60px rgba(148, 163, 184, 0.55);
-  }
-
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  html,
-  body {
-    height: 100%;
-  }
-
-  body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-      sans-serif;
-    background-color: var(--sp-bg);
-    color: var(--sp-text-body);
-    line-height: 1.5;
-  }
-
-  a {
-    color: var(--sp-primary);
-    text-decoration: none;
-  }
-
-  /* =========================
-     2. ACHTERGROND & LAYOUT
-     ========================== */
-
-  .page {
-    min-height: 100vh;
-    position: relative;
-    overflow-x: hidden;
-  }
-
-  .page::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background-image: url("assets/hero-city.png");
-    background-size: cover;
-    background-position: center;
-    filter: blur(2px);
-    transform: scale(1.02);
-    z-index: -2;
-  }
-
-  .page::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(
-        circle at top center,
-        var(--sp-glow),
-        transparent 55%
-      ),
-      var(--sp-bg-overlay);
-    z-index: -1;
-  }
-
-  .shell {
-    max-width: 1120px;
-    margin: 0 auto;
-    padding: 96px 24px 64px;
-  }
-
-  /* =========================
-     3. HEADER
-     ========================== */
-
-  .header {
-    position: sticky;
-    top: 0;
-    z-index: 40;
-    backdrop-filter: blur(14px);
-    background-color: var(--sp-header-bg);
-    border-bottom: 1px solid var(--sp-card-border);
-  }
-
-  .header-inner {
-    max-width: 1120px;
-    margin: 0 auto;
-    padding: 12px 24px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .brand-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 16px;
-    padding: 10px 20px;
-    border-radius: 18px;
-    background: linear-gradient(
-      135deg,
-      rgba(15, 23, 42, 0.98),
-      rgba(30, 64, 175, 0.92)
-    );
-    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.55);
-    border: 1px solid rgba(148, 163, 184, 0.4);
-    color: #f9fafb;
-    flex-shrink: 0;
-  }
-
-  .brand-logo {
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
-    overflow: hidden;
-    background: #020617;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .brand-logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-
-  .brand-text-main {
-    font-size: 13px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    font-weight: 600;
-  }
-
-  .brand-text-sub {
-    font-size: 11px;
-    opacity: 0.9;
-  }
-
-  .header-spacer {
-    flex: 1;
-  }
-
-  .header-toggle-group {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 3px;
-    border-radius: 999px;
-    background-color: var(--sp-header-chip-bg);
-    border: 1px solid var(--sp-header-chip-border);
-  }
-
-  .toggle-btn {
-    border: none;
-    background: transparent;
-    color: var(--sp-text-muted);
-    font-size: 11px;
-    padding: 6px 10px;
-    border-radius: 999px;
-    cursor: pointer;
-    transition: all 0.16s ease;
-    white-space: nowrap;
-  }
-
-  .toggle-btn.is-active {
-    background-color: var(--sp-primary);
-    color: #f9fafb;
-    box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.25),
-      0 10px 30px rgba(37, 99, 235, 0.45);
-  }
-
-  .lang-group {
-    margin-left: 10px;
-  }
-
-  .auth-group {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-left: 16px;
-  }
-
-  .btn {
-    border-radius: 999px;
-    padding: 8px 16px;
-    font-size: 13px;
-    font-weight: 500;
-    border: 1px solid transparent;
-    cursor: pointer;
-    transition: all 0.16s ease;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap;
-  }
-
-  .btn-primary {
-    background: var(--sp-primary);
-    color: #f9fafb;
-    box-shadow: 0 10px 26px rgba(56, 189, 248, 0.45);
-  }
-
-  .btn-primary:hover {
-    background: var(--sp-primary-hover);
-    box-shadow: 0 14px 40px rgba(56, 189, 248, 0.6);
-  }
-
-  .btn-ghost {
-    background: transparent;
-    color: var(--sp-text-body);
-    border-color: rgba(148, 163, 184, 0.6);
-  }
-
-  .btn-ghost:hover {
-    background: rgba(148, 163, 184, 0.16);
-  }
-
-  /* =========================
-     4. HERO
-     ========================== */
-
-  .hero {
-    margin-top: 40px;
-    display: grid;
-    grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
-    gap: 24px;
-  }
-
-  .card {
-    background-color: var(--sp-card-bg);
-    border-radius: 24px;
-    border: 1px solid var(--sp-card-border);
-    box-shadow: var(--sp-shadow-soft);
-    padding: 22px 26px 24px;
-  }
-
-  .card-header-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 4px 10px;
-    border-radius: 999px;
-    background-color: var(--sp-chip-bg);
-    border: 1px solid var(--sp-chip-border);
-    color: var(--sp-chip-text);
-    font-size: 11px;
-    margin-bottom: 14px;
-  }
-
-  .chip-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 999px;
-    background: #22c55e;
-    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.35);
-  }
-
-  .hero-title {
-    font-size: 28px;
-    line-height: 1.2;
-    font-weight: 700;
-    color: var(--sp-text-main);
-    margin-bottom: 12px;
-  }
-
-  .hero-lead {
-    font-size: 14px;
-    color: var(--sp-text-body);
-    margin-bottom: 16px;
-    max-width: 40rem;
-  }
-
-  .hero-list {
-    list-style: disc;
-    padding-left: 18px;
-    font-size: 13px;
-    color: var(--sp-text-body);
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .hero-footnote {
-    margin-top: 10px;
-    font-size: 11px;
-    color: var(--sp-text-muted);
-  }
-
-  .hero-side-title {
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--sp-text-main);
-    margin-bottom: 10px;
-  }
-
-  .hero-side-text {
-    font-size: 13px;
-    color: var(--sp-text-body);
-  }
-
-  /* =========================
-     5. VIDEOSECTIE
-     ========================== */
-
-  .section {
-    margin-top: 40px;
-  }
-
-  .video-card {
-    margin-top: 14px;
-    border-radius: 26px;
-    background-color: var(--sp-card-bg);
-    border: 1px solid var(--sp-card-border);
-    box-shadow: var(--sp-shadow-soft);
-    padding: 18px 18px 24px;
-  }
-
-  .video-wrapper {
-    border-radius: 20px;
-    overflow: hidden;
-    background-color: #000;
-  }
-
-  video {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  .section-title {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--sp-text-main);
-  }
-
-  .section-sub {
-    font-size: 13px;
-    color: var(--sp-text-muted);
-    margin-top: 2px;
-  }
-
-  /* =========================
-     6. FOOTER
-     ========================== */
-
-  .footer {
-    margin-top: 40px;
-    padding: 20px 0 8px;
-    font-size: 11px;
-    color: var(--sp-text-muted);
-    border-top: 1px solid rgba(148, 163, 184, 0.35);
-  }
-
-  .footer-inner {
-    max-width: 1120px;
-    margin: 0 auto;
-    padding: 0 24px;
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-
-  /* =========================
-     7. RESPONSIVE
-     ========================== */
-
-  @media (max-width: 900px) {
-    .shell {
-      padding-top: 80px;
-    }
-
-    .header-inner {
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .hero {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>
+<!doctype html>
+<html lang="nl" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <title>SmartPark Portal – SmartPark Solutions</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <style>
+      /* =========================
+         1. BASIS & THEME VARIABELEN
+         ========================== */
+
+      :root[data-theme="dark"] {
+        /* Achtergrond & lagen */
+        --sp-bg: #020617; /* bijna-zwart navy (slate 950) */
+        --sp-bg-overlay: rgba(2, 6, 23, 0.82);
+        --sp-glow: rgba(15, 23, 42, 0.7);
+
+        /* Kaarten */
+        --sp-card-bg: #0b1120; /* indigo-950 */
+        --sp-card-border: #1e293b; /* slate-800 */
+
+        /* Tekst */
+        --sp-text-main: #f9fafb;
+        --sp-text-body: #e5e7eb;
+        --sp-text-muted: #9ca3af;
+
+        /* Primair accent (lichtblauw) */
+        --sp-primary: #38bdf8; /* sky-400 */
+        --sp-primary-hover: #0ea5e9; /* sky-500 */
+
+        /* Header & chips */
+        --sp-header-bg: rgba(15, 23, 42, 0.98);
+        --sp-header-chip-bg: rgba(15, 23, 42, 0.92);
+        --sp-header-chip-border: rgba(148, 163, 184, 0.45);
+
+        --sp-chip-bg: rgba(15, 23, 42, 0.9);
+        --sp-chip-border: #1e293b;
+        --sp-chip-text: #e5e7eb;
+
+        /* Inputvelden */
+        --sp-input-bg: #020617;
+        --sp-input-border: #1e293b;
+        --sp-input-text: #e5e7eb;
+
+        /* Schaduw */
+        --sp-shadow-soft: 0 26px 70px rgba(15, 23, 42, 0.7);
+      }
+
+      :root[data-theme="light"] {
+        /* Achtergrond & lagen */
+        --sp-bg: #d7e2f0; /* koel grijs-blauw */
+        --sp-bg-overlay: rgba(215, 226, 240, 0.86);
+        --sp-glow: rgba(148, 163, 184, 0.55);
+
+        /* Kaarten */
+        --sp-card-bg: #f6f8fc; /* zacht lichtblauw/grijs */
+        --sp-card-border: #cbd5f5; /* lavendelblauw */
+
+        /* Tekst */
+        --sp-text-main: #020617;
+        --sp-text-body: #111827;
+        --sp-text-muted: #6b7280;
+
+        /* Primair accent (klassiek blauw) */
+        --sp-primary: #2563eb;
+        --sp-primary-hover: #1d4ed8;
+
+        /* Header & chips */
+        --sp-header-bg: rgba(243, 246, 255, 0.97);
+        --sp-header-chip-bg: rgba(255, 255, 255, 0.94);
+        --sp-header-chip-border: rgba(148, 163, 184, 0.7);
+
+        --sp-chip-bg: rgba(255, 255, 255, 0.96);
+        --sp-chip-border: #cbd5f5;
+        --sp-chip-text: #0f172a;
+
+        /* Inputvelden */
+        --sp-input-bg: #ffffff;
+        --sp-input-border: #cbd5f5;
+        --sp-input-text: #0f172a;
+
+        /* Schaduw */
+        --sp-shadow-soft: 0 22px 60px rgba(148, 163, 184, 0.55);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background-color: var(--sp-bg);
+        color: var(--sp-text-body);
+        line-height: 1.5;
+      }
+
+      a {
+        color: var(--sp-primary);
+        text-decoration: none;
+      }
+
+      /* =========================
+         2. ACHTERGROND & LAYOUT
+         ========================== */
+
+      .page {
+        min-height: 100vh;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      .page::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: url("assets/hero-city.png");
+        background-size: cover;
+        background-position: center;
+        filter: blur(2px);
+        transform: scale(1.02);
+        z-index: -2;
+      }
+
+      .page::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: radial-gradient(
+            circle at top center,
+            var(--sp-glow),
+            transparent 55%
+          ),
+          var(--sp-bg-overlay);
+        z-index: -1;
+      }
+
+      .shell {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 96px 24px 64px;
+      }
+
+      /* =========================
+         3. HEADER
+         ========================== */
+
+      .header {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        backdrop-filter: blur(14px);
+        background-color: var(--sp-header-bg);
+        border-bottom: 1px solid var(--sp-card-border);
+      }
+
+      .header-inner {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 10px 24px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        position: relative;
+      }
+
+      .brand-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        padding: 8px 18px;
+        border-radius: 999px;
+        background: linear-gradient(
+          135deg,
+          rgba(15, 23, 42, 0.98),
+          rgba(30, 64, 175, 0.96)
+        );
+        box-shadow: 0 16px 40px rgba(15, 23, 42, 0.55);
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        color: #f9fafb;
+        flex-shrink: 0;
+      }
+
+      .brand-logo {
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #020617;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .brand-logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .brand-text-main {
+        font-size: 13px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+
+      .brand-text-sub {
+        font-size: 11px;
+        opacity: 0.9;
+      }
+
+      .header-spacer {
+        flex: 1;
+      }
+
+      .header-toggle-group {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 3px;
+        border-radius: 999px;
+        background-color: var(--sp-header-chip-bg);
+        border: 1px solid var(--sp-header-chip-border);
+      }
+
+      .toggle-btn {
+        border: none;
+        background: transparent;
+        color: var(--sp-text-muted);
+        font-size: 11px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: all 0.16s ease;
+        white-space: nowrap;
+      }
+
+      .toggle-btn.is-active {
+        background-color: var(--sp-primary);
+        color: #f9fafb;
+        box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.25),
+          0 10px 30px rgba(37, 99, 235, 0.45);
+      }
+
+      .lang-group {
+        margin-left: 10px;
+      }
+
+      .auth-group {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-left: 16px;
+      }
+
+      .btn {
+        border-radius: 999px;
+        padding: 8px 16px;
+        font-size: 13px;
+        font-weight: 500;
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition: all 0.16s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+      }
+
+      .btn-primary {
+        background: var(--sp-primary);
+        color: #f9fafb;
+        box-shadow: 0 10px 26px rgba(56, 189, 248, 0.45);
+      }
+
+      .btn-primary:hover {
+        background: var(--sp-primary-hover);
+        box-shadow: 0 14px 40px rgba(56, 189, 248, 0.6);
+      }
+
+      .btn-ghost {
+        background: transparent;
+        color: var(--sp-text-body);
+        border-color: rgba(148, 163, 184, 0.6);
+      }
+
+      .btn-ghost:hover {
+        background: rgba(148, 163, 184, 0.16);
+      }
+
+      /* ---- dropdown login / toegang ---- */
+
+      .auth-dropdown {
+        position: absolute;
+        top: 52px;
+        right: 24px;
+        width: 320px;
+        border-radius: 16px;
+        background-color: var(--sp-card-bg);
+        border: 1px solid var(--sp-card-border);
+        box-shadow: var(--sp-shadow-soft);
+        padding: 14px 16px 16px;
+        display: none;
+        z-index: 45;
+      }
+
+      .auth-dropdown.is-open {
+        display: block;
+      }
+
+      .auth-dropdown-title {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--sp-text-main);
+        margin-bottom: 4px;
+      }
+
+      .auth-dropdown-text {
+        font-size: 12px;
+        color: var(--sp-text-muted);
+        margin-bottom: 10px;
+      }
+
+      .field-group {
+        margin-bottom: 8px;
+      }
+
+      .field-label {
+        font-size: 11px;
+        color: var(--sp-text-muted);
+        margin-bottom: 3px;
+        display: block;
+      }
+
+      .field-input,
+      .field-textarea {
+        width: 100%;
+        border-radius: 10px;
+        border: 1px solid var(--sp-input-border);
+        background-color: var(--sp-input-bg);
+        color: var(--sp-input-text);
+        font-size: 13px;
+        padding: 7px 9px;
+        outline: none;
+        transition: border-color 0.14s ease, box-shadow 0.14s ease,
+          background-color 0.14s ease;
+      }
+
+      .field-textarea {
+        resize: vertical;
+        min-height: 52px;
+      }
+
+      .field-input:focus,
+      .field-textarea:focus {
+        border-color: var(--sp-primary);
+        box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.6);
+      }
+
+      .auth-dropdown-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 8px;
+        gap: 8px;
+      }
+
+      .auth-link-small {
+        font-size: 11px;
+        color: var(--sp-primary);
+        text-decoration: none;
+      }
+
+      .auth-link-small:hover {
+        text-decoration: underline;
+      }
+
+      /* =========================
+         4. HERO
+         ========================== */
+
+      .hero {
+        margin-top: 40px;
+        display: grid;
+        grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
+        gap: 24px;
+      }
+
+      .card {
+        background-color: var(--sp-card-bg);
+        border-radius: 24px;
+        border: 1px solid var(--sp-card-border);
+        box-shadow: var(--sp-shadow-soft);
+        padding: 22px 26px 24px;
+      }
+
+      .card-header-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background-color: var(--sp-chip-bg);
+        border: 1px solid var(--sp-chip-border);
+        color: var(--sp-chip-text);
+        font-size: 11px;
+        margin-bottom: 14px;
+      }
+
+      .chip-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: #22c55e;
+        box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.35);
+      }
+
+      .hero-title {
+        font-size: 28px;
+        line-height: 1.2;
+        font-weight: 700;
+        color: var(--sp-text-main);
+        margin-bottom: 12px;
+      }
+
+      .hero-lead {
+        font-size: 14px;
+        color: var(--sp-text-body);
+        margin-bottom: 16px;
+        max-width: 40rem;
+      }
+
+      .hero-list {
+        list-style: disc;
+        padding-left: 18px;
+        font-size: 13px;
+        color: var(--sp-text-body);
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .hero-footnote {
+        margin-top: 10px;
+        font-size: 11px;
+        color: var(--sp-text-muted);
+      }
+
+      .hero-side-title {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--sp-text-main);
+        margin-bottom: 10px;
+      }
+
+      .hero-side-text {
+        font-size: 13px;
+        color: var(--sp-text-body);
+      }
+
+      /* =========================
+         5. VIDEOSECTIE
+         ========================== */
+
+      .section {
+        margin-top: 40px;
+      }
+
+      .video-card {
+        margin-top: 4px;
+        border-radius: 26px;
+        background-color: var(--sp-card-bg);
+        border: 1px solid var(--sp-card-border);
+        box-shadow: var(--sp-shadow-soft);
+        padding: 18px 18px 24px;
+      }
+
+      .video-wrapper {
+        border-radius: 20px;
+        overflow: hidden;
+        background-color: #000;
+      }
+
+      video {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      /* =========================
+         6. FOOTER
+         ========================== */
+
+      .footer {
+        margin-top: 40px;
+        padding: 20px 0 8px;
+        font-size: 11px;
+        color: var(--sp-text-muted);
+        border-top: 1px solid rgba(148, 163, 184, 0.35);
+      }
+
+      .footer-inner {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 24px;
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      /* =========================
+         7. RESPONSIVE
+         ========================== */
+
+      @media (max-width: 900px) {
+        .shell {
+          padding-top: 80px;
+        }
+
+        .header-inner {
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+
+        .hero {
+          grid-template-columns: 1fr;
+        }
+
+        .auth-dropdown {
+          right: 16px;
+          width: min(320px, calc(100% - 32px));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <!-- ========= HEADER ========= -->
+      <header class="header">
+        <div class="header-inner">
+          <div class="brand-pill">
+            <div class="brand-logo">
+              <img src="assets/smartpark-logo.png" alt="SmartPark logo" />
+            </div>
+            <div>
+              <div class="brand-text-main">SmartPark Portal</div>
+              <div class="brand-text-sub">Powered by SmartPark Solutions</div>
+            </div>
+          </div>
+
+          <div class="header-spacer"></div>
+
+          <div class="header-toggle-group" id="themeToggle">
+            <button
+              type="button"
+              class="toggle-btn is-active"
+              data-theme-target="dark"
+            >
+              Donker
+            </button>
+            <button
+              type="button"
+              class="toggle-btn"
+              data-theme-target="light"
+            >
+              Licht
+            </button>
+          </div>
+
+          <div class="header-toggle-group lang-group" id="langToggle">
+            <button
+              type="button"
+              class="toggle-btn is-active"
+              data-lang-target="nl"
+            >
+              NL
+            </button>
+            <button
+              type="button"
+              class="toggle-btn"
+              data-lang-target="fr"
+            >
+              FR
+            </button>
+            <button
+              type="button"
+              class="toggle-btn"
+              data-lang-target="de"
+            >
+              DE
+            </button>
+            <button
+              type="button"
+              class="toggle-btn"
+              data-lang-target="en"
+            >
+              EN
+            </button>
+          </div>
+
+          <div class="auth-group">
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="loginBtn"
+              data-i18n-btn-login
+            >
+              Inloggen
+            </button>
+            <button
+              type="button"
+              class="btn btn-ghost"
+              id="requestBtn"
+              data-i18n-btn-request
+            >
+              Toegang vragen
+            </button>
+          </div>
+
+          <!-- Login dropdown -->
+          <div class="auth-dropdown" id="loginDropdown">
+            <div class="auth-dropdown-title" data-i18n-login-title>
+              Inloggen op SmartPark Portal
+            </div>
+            <div class="auth-dropdown-text" data-i18n-login-text>
+              Vul uw gebruikersnaam of e-mail en wachtwoord in om verder te
+              gaan.
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" data-i18n-login-user-label
+                >Gebruikersnaam of e-mail</label
+              >
+              <input
+                type="text"
+                class="field-input"
+                autocomplete="username"
+              />
+            </div>
+            <div class="field-group">
+              <label class="field-label" data-i18n-login-pass-label
+                >Wachtwoord</label
+              >
+              <input
+                type="password"
+                class="field-input"
+                autocomplete="current-password"
+              />
+            </div>
+
+            <div class="auth-dropdown-footer">
+              <a href="#" class="auth-link-small" data-i18n-login-forgot
+                >Wachtwoord vergeten?</a
+              >
+              <button
+                type="button"
+                class="btn btn-primary"
+                style="padding-inline: 14px"
+                data-i18n-login-submit
+              >
+                Inloggen
+              </button>
+            </div>
+          </div>
+
+          <!-- Access request dropdown -->
+          <div class="auth-dropdown" id="requestDropdown">
+            <div class="auth-dropdown-title" data-i18n-request-title>
+              Toegang aanvragen
+            </div>
+            <div class="auth-dropdown-text" data-i18n-request-text>
+              Vraag een toegang aan voor SmartPark Portal. Uw aanvraag wordt
+              beoordeeld door SmartPark Solutions.
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" data-i18n-request-name-label
+                >Naam & voornaam</label
+              >
+              <input type="text" class="field-input" />
+            </div>
+            <div class="field-group">
+              <label class="field-label" data-i18n-request-org-label
+                >Organisatie / stad / gemeente</label
+              >
+              <input type="text" class="field-input" />
+            </div>
+            <div class="field-group">
+              <label class="field-label" data-i18n-request-email-label
+                >Zakelijk e-mailadres</label
+              >
+              <input type="email" class="field-input" />
+            </div>
+            <div class="field-group">
+              <label class="field-label" data-i18n-request-role-label
+                >Rol (dienst mobiliteit, financiën, techniek, …)</label
+              >
+              <input type="text" class="field-input" />
+            </div>
+            <div class="field-group">
+              <label class="field-label" data-i18n-request-notes-label
+                >Korte toelichting (optioneel)</label
+              >
+              <textarea class="field-textarea"></textarea>
+            </div>
+
+            <div class="auth-dropdown-footer">
+              <span style="font-size: 10px; color: var(--sp-text-muted)"
+                data-i18n-request-note
+                >Uw aanvraag wordt niet automatisch goedgekeurd.</span
+              >
+              <button
+                type="button"
+                class="btn btn-primary"
+                style="padding-inline: 14px"
+                data-i18n-request-submit
+              >
+                Aanvraag indienen
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ========= MAIN ========= -->
+      <main class="shell">
+        <!-- Hero -->
+        <section class="hero">
+          <article class="card">
+            <div class="card-header-chip">
+              <span class="chip-dot"></span>
+              <span data-i18n-hero-chip
+                >Centraal portaal voor steden, gemeenten en interne
+                teams</span
+              >
+            </div>
+            <h1 class="hero-title" data-i18n-hero-title>
+              Eén centraal platform voor al uw parkeerbeheer.
+            </h1>
+            <p class="hero-lead" data-i18n-hero-lead>
+              SmartPark Portal combineert parkeerautomaten, transacties,
+              rapporten, inspecties en storingen in één overzichtelijke
+              omgeving. Ontworpen voor mobiliteit, financiën, techniek en
+              management — afgestemd op uw dagelijkse werking.
+            </p>
+            <ul class="hero-list" id="heroList">
+              <!-- bullets worden via JS gevuld -->
+            </ul>
+            <p class="hero-footnote" data-i18n-hero-footnote>
+              Log in met uw bestaande account of vraag toegang aan via SmartPark
+              Solutions.
+            </p>
+          </article>
+
+          <aside class="card">
+            <div class="hero-side-title" data-i18n-hero-side-title>
+              Wat u in SmartPark Portal terugvindt
+            </div>
+            <p class="hero-side-text" data-i18n-hero-side-text>
+              SmartPark Portal geeft uw organisatie een volledig beeld van
+              inkomsten, bezetting, betalingen, storingen, tickets,
+              interventies en veldinspecties. Dashboards en rapporten zijn
+              gestandaardiseerd maar blijven dynamisch filterbaar per periode,
+              zone, automaat, betaalwijze en verantwoordelijke dienst.
+              Automatische alerts en analyses signaleren afwijkingen vroegtijdig
+              en suggereren acties, zodat u sneller kunt bijsturen en betere
+              beslissingen kunt nemen op basis van één betrouwbare bron van
+              waarheid.
+            </p>
+          </aside>
+        </section>
+
+        <!-- Video -->
+        <section class="section">
+          <div class="video-card">
+            <div class="video-wrapper">
+              <video controls preload="metadata">
+                <source
+                  src="assets/SmartPark_Parkeerbeheer.mp4"
+                  type="video/mp4"
+                />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+          <div class="footer-inner">
+            <div data-i18n-footer-left>
+              © 2025 SmartPark Solutions – Alle rechten voorbehouden.
+            </div>
+            <div data-i18n-footer-right>
+              Voor professionele gebruikers: steden, gemeenten en interne teams.
+            </div>
+          </div>
+        </footer>
+      </main>
+    </div>
+
+    <!-- ========= SCRIPT ========= -->
+    <script>
+      const texts = {
+        nl: {
+          heroChip: "Centraal portaal voor steden, gemeenten en interne teams",
+          heroTitle: "Eén centraal platform voor al uw parkeerbeheer.",
+          heroLead:
+            "SmartPark Portal combineert parkeerautomaten, transacties, rapporten, inspecties en storingen in één overzichtelijke omgeving. Ontworpen voor mobiliteit, financiën, techniek en management — afgestemd op uw dagelijkse werking.",
+          heroBullets: [
+            "Datagedreven dashboards op basis van real-time en historische gegevens.",
+            "Automatische rapporten per dienst, automaat, zone of project.",
+            "Slimme waarschuwingen bij storingen, dalende inkomsten en afwijkend gedrag.",
+            "Operationele aanbevelingen op basis van patronen en trends.",
+            "FastField-inspecties gekoppeld aan automaten, tickets en interventies.",
+            "Cityline-gegevens samengebracht in één beveiligd portaal."
+          ],
+          heroFootnote:
+            "Log in met uw bestaande account of vraag toegang aan via SmartPark Solutions.",
+          heroSideTitle: "Wat u in SmartPark Portal terugvindt",
+          heroSideText:
+            "SmartPark Portal geeft uw organisatie een volledig beeld van inkomsten, bezetting, betalingen, storingen, tickets, interventies en veldinspecties. Dashboards en rapporten zijn gestandaardiseerd maar blijven dynamisch filterbaar per periode, zone, automaat, betaalwijze en verantwoordelijke dienst. Automatische alerts en analyses signaleren afwijkingen vroegtijdig en suggereren acties, zodat u sneller kunt bijsturen en betere beslissingen kunt nemen op basis van één betrouwbare bron van waarheid.",
+          btnLogin: "Inloggen",
+          btnRequest: "Toegang vragen",
+          loginTitle: "Inloggen op SmartPark Portal",
+          loginText:
+            "Vul uw gebruikersnaam of e-mail en wachtwoord in om verder te gaan.",
+          loginUserLabel: "Gebruikersnaam of e-mail",
+          loginPassLabel: "Wachtwoord",
+          loginForgot: "Wachtwoord vergeten?",
+          loginSubmit: "Inloggen",
+          requestTitle: "Toegang aanvragen",
+          requestText:
+            "Vraag een toegang aan voor SmartPark Portal. Uw aanvraag wordt beoordeeld door SmartPark Solutions.",
+          requestNameLabel: "Naam & voornaam",
+          requestOrgLabel: "Organisatie / stad / gemeente",
+          requestEmailLabel: "Zakelijk e-mailadres",
+          requestRoleLabel:
+            "Rol (dienst mobiliteit, financiën, techniek, …)",
+          requestNotesLabel: "Korte toelichting (optioneel)",
+          requestNote:
+            "Uw aanvraag wordt niet automatisch goedgekeurd.",
+          requestSubmit: "Aanvraag indienen",
+          footerLeft:
+            "© 2025 SmartPark Solutions – Alle rechten voorbehouden.",
+          footerRight:
+            "Voor professionele gebruikers: steden, gemeenten en interne teams."
+        },
+        fr: {
+          heroChip:
+            "Portail central pour villes, communes et équipes internes",
+          heroTitle:
+            "Une plateforme centrale pour toute votre gestion du stationnement.",
+          heroLead:
+            "SmartPark Portal regroupe horodateurs, transactions, rapports, inspections et incidents dans un environnement clair et sécurisé. Conçu pour les services de mobilité, finances, technique et direction.",
+          heroBullets: [
+            "Tableaux de bord basés sur des données en temps réel et historiques.",
+            "Rapports automatiques par service, horodateur, zone ou projet.",
+            "Alertes intelligentes en cas de pannes, baisse de revenus ou anomalies.",
+            "Recommandations opérationnelles basées sur les tendances.",
+            "Inspections FastField liées aux horodateurs, tickets et interventions.",
+            "Données Cityline rassemblées dans un portail sécurisé."
+          ],
+          heroFootnote:
+            "Connectez-vous avec votre compte existant ou demandez un accès via SmartPark Solutions.",
+          heroSideTitle: "Ce que vous trouvez dans SmartPark Portal",
+          heroSideText:
+            "SmartPark Portal offre une vue complète sur les revenus, l’occupation, les paiements, les pannes, les tickets, les interventions et les inspections de terrain. Les tableaux de bord et rapports sont standardisés mais restent filtrables par période, zone, horodateur, mode de paiement et service responsable. Les alertes et analyses automatiques signalent rapidement les écarts et suggèrent des actions, afin de prendre de meilleures décisions sur base d’une source unique de vérité.",
+          btnLogin: "Se connecter",
+          btnRequest: "Demander un accès",
+          loginTitle: "Connexion à SmartPark Portal",
+          loginText:
+            "Saisissez votre nom d’utilisateur ou e-mail et votre mot de passe pour continuer.",
+          loginUserLabel: "Nom d’utilisateur ou e-mail",
+          loginPassLabel: "Mot de passe",
+          loginForgot: "Mot de passe oublié ?",
+          loginSubmit: "Se connecter",
+          requestTitle: "Demande d’accès",
+          requestText:
+            "Demandez un accès à SmartPark Portal. Votre demande sera évaluée par SmartPark Solutions.",
+          requestNameLabel: "Nom & prénom",
+          requestOrgLabel: "Organisation / ville / commune",
+          requestEmailLabel: "Adresse e-mail professionnelle",
+          requestRoleLabel:
+            "Rôle (service mobilité, finances, technique, …)",
+          requestNotesLabel: "Brève explication (optionnel)",
+          requestNote:
+            "Votre demande n’est pas approuvée automatiquement.",
+          requestSubmit: "Envoyer la demande",
+          footerLeft:
+            "© 2025 SmartPark Solutions – Tous droits réservés.",
+          footerRight:
+            "Pour utilisateurs professionnels : villes, communes et équipes internes."
+        },
+        de: {
+          heroChip:
+            "Zentrales Portal für Städte, Gemeinden und interne Teams",
+          heroTitle:
+            "Eine zentrale Plattform für Ihr gesamtes Parkraummanagement.",
+          heroLead:
+            "SmartPark Portal bündelt Parkscheinautomaten, Transaktionen, Berichte, Inspektionen und Störungen in einer übersichtlichen Umgebung – für Mobilität, Finanzen, Technik und Management.",
+          heroBullets: [
+            "Datengetriebene Dashboards auf Basis von Echtzeit- und historischen Daten.",
+            "Automatische Berichte pro Dienst, Automat, Zone oder Projekt.",
+            "Intelligente Warnungen bei Störungen, Umsatzrückgängen oder Auffälligkeiten.",
+            "Operationelle Empfehlungen auf Basis von Mustern und Trends.",
+            "FastField-Inspektionen verknüpft mit Automaten, Tickets und Einsätzen.",
+            "Cityline-Daten in einem sicheren Portal zusammengeführt."
+          ],
+          heroFootnote:
+            "Melden Sie sich mit Ihrem bestehenden Konto an oder beantragen Sie einen Zugang über SmartPark Solutions.",
+          heroSideTitle: "Was Sie im SmartPark Portal finden",
+          heroSideText:
+            "SmartPark Portal bietet Ihrer Organisation einen vollständigen Überblick über Einnahmen, Auslastung, Zahlungen, Störungen, Tickets, Einsätze und Feldinspektionen. Dashboards und Berichte sind standardisiert, bleiben jedoch dynamisch filterbar nach Zeitraum, Zone, Automat, Zahlungsart und zuständigem Dienst. Automatische Alarme und Analysen erkennen Abweichungen frühzeitig und schlagen Maßnahmen vor, damit Sie schneller reagieren und bessere Entscheidungen auf Basis einer einzigen verlässlichen Datenquelle treffen können.",
+          btnLogin: "Anmelden",
+          btnRequest: "Zugang anfordern",
+          loginTitle: "Anmeldung im SmartPark Portal",
+          loginText:
+            "Geben Sie Ihren Benutzernamen oder Ihre E-Mail-Adresse und Ihr Passwort ein, um fortzufahren.",
+          loginUserLabel: "Benutzername oder E-Mail",
+          loginPassLabel: "Passwort",
+          loginForgot: "Passwort vergessen?",
+          loginSubmit: "Anmelden",
+          requestTitle: "Zugang anfordern",
+          requestText:
+            "Fordern Sie einen Zugang zum SmartPark Portal an. Ihre Anfrage wird von SmartPark Solutions geprüft.",
+          requestNameLabel: "Name & Vorname",
+          requestOrgLabel: "Organisation / Stadt / Gemeinde",
+          requestEmailLabel: "Geschäftliche E-Mail-Adresse",
+          requestRoleLabel:
+            "Rolle (Mobilität, Finanzen, Technik, …)",
+          requestNotesLabel: "Kurze Erläuterung (optional)",
+          requestNote:
+            "Ihre Anfrage wird nicht automatisch genehmigt.",
+          requestSubmit: "Anfrage senden",
+          footerLeft:
+            "© 2025 SmartPark Solutions – Alle Rechte vorbehalten.",
+          footerRight:
+            "Für professionelle Nutzer: Städte, Gemeinden und interne Teams."
+        },
+        en: {
+          heroChip:
+            "Central portal for cities, municipalities and internal teams",
+          heroTitle:
+            "One central platform for all your parking operations.",
+          heroLead:
+            "SmartPark Portal brings together parking meters, transactions, reports, inspections and incidents in a single clear environment – designed for mobility, finance, technical teams and management.",
+          heroBullets: [
+            "Data-driven dashboards based on real-time and historical data.",
+            "Automated reports per department, meter, zone or project.",
+            "Smart alerts for failures, declining revenue and abnormal patterns.",
+            "Operational recommendations based on trends and behaviour.",
+            "FastField inspections linked to meters, tickets and interventions.",
+            "Cityline data consolidated into one secure portal."
+          ],
+          heroFootnote:
+            "Log in with your existing account or request access via SmartPark Solutions.",
+          heroSideTitle: "What you will find in SmartPark Portal",
+          heroSideText:
+            "SmartPark Portal gives your organisation a complete view of revenue, occupancy, payments, failures, tickets, interventions and field inspections. Dashboards and reports are standardised but remain dynamically filterable by period, zone, meter, payment method and responsible department. Automatic alerts and analytics highlight anomalies early and suggest actions, helping you adjust faster and take better decisions based on a single source of truth.",
+          btnLogin: "Log in",
+          btnRequest: "Request access",
+          loginTitle: "Log in to SmartPark Portal",
+          loginText:
+            "Enter your username or e-mail address and password to continue.",
+          loginUserLabel: "Username or e-mail",
+          loginPassLabel: "Password",
+          loginForgot: "Forgot your password?",
+          loginSubmit: "Log in",
+          requestTitle: "Request access",
+          requestText:
+            "Request access to SmartPark Portal. Your request will be reviewed by SmartPark Solutions.",
+          requestNameLabel: "Name & surname",
+          requestOrgLabel: "Organisation / city / municipality",
+          requestEmailLabel: "Business e-mail address",
+          requestRoleLabel:
+            "Role (mobility, finance, technical team, …)",
+          requestNotesLabel: "Short explanation (optional)",
+          requestNote:
+            "Your request is not approved automatically.",
+          requestSubmit: "Submit request",
+          footerLeft:
+            "© 2025 SmartPark Solutions – All rights reserved.",
+          footerRight:
+            "For professional users: cities, municipalities and internal teams."
+        }
+      };
+
+      const state = {
+        theme: "dark",
+        lang: "nl"
+      };
+
+      function applyTheme(theme) {
+        state.theme = theme;
+        document.documentElement.setAttribute("data-theme", theme);
+
+        document
+          .querySelectorAll('[data-theme-target]')
+          .forEach((btn) => {
+            btn.classList.toggle(
+              "is-active",
+              btn.getAttribute("data-theme-target") === theme
+            );
+          });
+      }
+
+      function renderLanguage(lang) {
+        const t = texts[lang];
+
+        // eenvoudige velden
+        document.querySelector('[data-i18n-hero-chip]').textContent =
+          t.heroChip;
+        document.querySelector('[data-i18n-hero-title]').textContent =
+          t.heroTitle;
+        document.querySelector('[data-i18n-hero-lead]').textContent =
+          t.heroLead;
+        document.querySelector('[data-i18n-hero-footnote]').textContent =
+          t.heroFootnote;
+        document.querySelector('[data-i18n-hero-side-title]').textContent =
+          t.heroSideTitle;
+        document.querySelector('[data-i18n-hero-side-text]').textContent =
+          t.heroSideText;
+        document.querySelector('[data-i18n-btn-login]').textContent =
+          t.btnLogin;
+        document.querySelector('[data-i18n-btn-request]').textContent =
+          t.btnRequest;
+
+        // bullets
+        const ul = document.getElementById("heroList");
+        ul.innerHTML = "";
+        t.heroBullets.forEach((line) => {
+          const li = document.createElement("li");
+          li.textContent = line;
+          ul.appendChild(li);
+        });
+
+        // login dropdown
+        document.querySelector('[data-i18n-login-title]').textContent =
+          t.loginTitle;
+        document.querySelector('[data-i18n-login-text]').textContent =
+          t.loginText;
+        document.querySelector('[data-i18n-login-user-label]').textContent =
+          t.loginUserLabel;
+        document.querySelector('[data-i18n-login-pass-label]').textContent =
+          t.loginPassLabel;
+        document.querySelector('[data-i18n-login-forgot]').textContent =
+          t.loginForgot;
+        document.querySelector('[data-i18n-login-submit]').textContent =
+          t.loginSubmit;
+
+        // request dropdown
+        document.querySelector('[data-i18n-request-title]').textContent =
+          t.requestTitle;
+        document.querySelector('[data-i18n-request-text]').textContent =
+          t.requestText;
+        document.querySelector('[data-i18n-request-name-label]').textContent =
+          t.requestNameLabel;
+        document.querySelector('[data-i18n-request-org-label]').textContent =
+          t.requestOrgLabel;
+        document.querySelector('[data-i18n-request-email-label]').textContent =
+          t.requestEmailLabel;
+        document.querySelector('[data-i18n-request-role-label]').textContent =
+          t.requestRoleLabel;
+        document.querySelector('[data-i18n-request-notes-label]').textContent =
+          t.requestNotesLabel;
+        document.querySelector('[data-i18n-request-note]').textContent =
+          t.requestNote;
+        document.querySelector('[data-i18n-request-submit]').textContent =
+          t.requestSubmit;
+
+        // footer
+        document.querySelector('[data-i18n-footer-left]').textContent =
+          t.footerLeft;
+        document.querySelector('[data-i18n-footer-right]').textContent =
+          t.footerRight;
+
+        // toggle active classes
+        document
+          .querySelectorAll('[data-lang-target]')
+          .forEach((btn) => {
+            btn.classList.toggle(
+              "is-active",
+              btn.getAttribute("data-lang-target") === lang
+            );
+          });
+
+        state.lang = lang;
+      }
+
+      function initThemeToggle() {
+        document
+          .getElementById("themeToggle")
+          .addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-theme-target]");
+            if (!btn) return;
+            const theme = btn.getAttribute("data-theme-target");
+            applyTheme(theme);
+          });
+      }
+
+      function initLangToggle() {
+        document
+          .getElementById("langToggle")
+          .addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-lang-target]");
+            if (!btn) return;
+            const lang = btn.getAttribute("data-lang-target");
+            renderLanguage(lang);
+          });
+      }
+
+      function initAuthDropdowns() {
+        const loginBtn = document.getElementById("loginBtn");
+        const requestBtn = document.getElementById("requestBtn");
+        const loginDropdown = document.getElementById("loginDropdown");
+        const requestDropdown =
+          document.getElementById("requestDropdown");
+
+        function closeAll() {
+          loginDropdown.classList.remove("is-open");
+          requestDropdown.classList.remove("is-open");
+        }
+
+        loginBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const open = loginDropdown.classList.contains("is-open");
+          closeAll();
+          if (!open) {
+            loginDropdown.classList.add("is-open");
+          }
+        });
+
+        requestBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const open = requestDropdown.classList.contains("is-open");
+          closeAll();
+          if (!open) {
+            requestDropdown.classList.add("is-open");
+          }
+        });
+
+        document.addEventListener("click", (e) => {
+          if (
+            e.target.closest("#loginDropdown") ||
+            e.target.closest("#requestDropdown") ||
+            e.target.closest("#loginBtn") ||
+            e.target.closest("#requestBtn")
+          ) {
+            return;
+          }
+          closeAll();
+        });
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") {
+            closeAll();
+          }
+        });
+      }
+
+      // init
+      document.addEventListener("DOMContentLoaded", () => {
+        applyTheme(state.theme);
+        renderLanguage(state.lang);
+        initThemeToggle();
+        initLangToggle();
+        initAuthDropdowns();
+      });
+    </script>
+  </body>
+</html>
